@@ -1,16 +1,20 @@
 export interface Skill {
   name: string
-  icon: string // Devicon class name or CDN URL
+  icon: string
 }
 
 export interface SkillCategory {
   name: string
   skills: Skill[]
+  categoryIcon: string
+  accent: string // gradient for the category icon background
 }
 
 export const SKILLS: SkillCategory[] = [
   {
     name: 'Frontend',
+    categoryIcon: '🖥',
+    accent: 'linear-gradient(135deg, #3b82f6 0%, #6366f1 100%)',
     skills: [
       { name: 'React Native', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg' },
       { name: 'Expo', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/expo/expo-original.svg' },
@@ -20,6 +24,8 @@ export const SKILLS: SkillCategory[] = [
   },
   {
     name: 'Backend',
+    categoryIcon: '⚙',
+    accent: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
     skills: [
       { name: 'Node.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg' },
       { name: 'Express', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original.svg' },
@@ -31,6 +37,8 @@ export const SKILLS: SkillCategory[] = [
   },
   {
     name: 'Tools & Misc',
+    categoryIcon: '🔧',
+    accent: 'linear-gradient(135deg, #f97316 0%, #ef4444 100%)',
     skills: [
       { name: 'Git', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg' },
       { name: 'Railway', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/railway/railway-original.svg' },

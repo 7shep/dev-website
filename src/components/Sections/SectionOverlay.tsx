@@ -18,7 +18,8 @@ export default function SectionOverlay() {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.4 }}
-          className="fixed inset-0 z-10 bg-black/70 backdrop-blur-md overflow-y-auto"
+          className="fixed inset-0 z-10 backdrop-blur-xl overflow-y-auto"
+          style={{ background: 'rgba(30, 40, 60, 0.65)' }}
         >
           {/* Home button */}
           <motion.button
@@ -48,7 +49,7 @@ export default function SectionOverlay() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.15, duration: 0.4 }}
-            className="max-w-6xl mx-auto px-10 py-24"
+            className="w-full mx-auto px-10 py-24 flex flex-col items-center"
           >
             {activeSection === 'skills' && <SkillsSection />}
             {activeSection === 'projects' && <ProjectsSection />}
