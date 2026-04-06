@@ -1,28 +1,32 @@
+import { motion } from 'motion/react'
 import { SKILLS } from '../../data/skills'
+import SkillCard from './SkillCard'
 
 export default function SkillsSection() {
   return (
-    <div>
-      <h2 className="text-4xl font-bold mb-2 text-blue-400">Skills</h2>
-      <p className="text-gray-400 mb-8">Technologies and tools I work with</p>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {SKILLS.map((category) => (
-          <div
-            key={category.name}
-            className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-blue-500/20 hover:border-blue-500/40 transition-colors"
-          >
-            <h3 className="text-lg font-semibold text-blue-300 mb-4">{category.name}</h3>
-            <div className="flex flex-wrap gap-2">
-              {category.skills.map((skill) => (
-                <span
-                  key={skill}
-                  className="px-3 py-1.5 bg-blue-500/10 text-blue-200 rounded-lg text-sm border border-blue-500/20"
-                >
-                  {skill}
-                </span>
-              ))}
-            </div>
-          </div>
+    <div className="flex flex-col items-center w-full">
+      <motion.h2
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
+        className="text-5xl text-white text-center mb-3 font-light tracking-tight"
+        style={{ fontFamily: '-apple-system, "SF Pro Display", "Helvetica Neue", sans-serif' }}
+      >
+        Skills
+      </motion.h2>
+
+      <motion.p
+        initial={{ opacity: 0, y: 15 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.08, duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
+        className="text-center text-white/30 text-sm mb-16 tracking-widest uppercase font-light"
+      >
+        Technologies and tools I work with
+      </motion.p>
+
+      <div className="flex flex-col lg:flex-row gap-8 items-start justify-center w-full max-w-6xl mx-auto">
+        {SKILLS.map((category, i) => (
+          <SkillCard key={category.name} category={category} index={i} />
         ))}
       </div>
     </div>
