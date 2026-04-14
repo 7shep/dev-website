@@ -4,14 +4,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Personal developer portfolio website. Single-page site with a space/solar system theme built with React Three Fiber. Three sections — Skills, Projects, and About Me — represented as planets (Earth, Mars, Saturn). Clicking a planet zooms the camera in and reveals that section's content as a DOM overlay.
+Personal developer portfolio website for Alex Shepherd. Single-page static site with a space/cosmic theme.
 
 ## Tech Stack
 
 - React 19 + TypeScript + Vite
-- React Three Fiber + @react-three/drei (3D solar system)
-- Motion (Framer Motion) for DOM transitions
-- Tailwind CSS v4
+- Tailwind CSS v3 with a fully custom dark color system (Material You-style tokens)
+- Material Symbols Outlined + Space Grotesk + Inter via Google Fonts CDN
 
 ## Commands
 
@@ -23,12 +22,16 @@ npm run preview  # Preview production build locally
 
 ## Architecture
 
-- **Navigation state machine** (`src/hooks/usePlanetNavigation.ts`): Three states — `solar-system` → `zooming` → `section`. Provided via React context.
-- **3D layer** (`src/components/SolarSystem/`): R3F Canvas with Sun, Planets, orbit rings, starfield, and a CameraController that lerps between overview and planet zoom positions.
-- **DOM layer** (`src/components/Sections/`): SectionOverlay renders on top of the canvas with backdrop blur. Uses Motion's AnimatePresence for enter/exit.
-- **Planet ↔ Section mapping**: Defined in `src/data/planets.ts`. Each planet config links to a section ID.
-- **Planet discovery**: CameraController finds planets by traversing the scene for `userData.planetId`.
+- `src/App.tsx` — root, renders all sections in order
+- `src/components/` — one file per section:
+  - `Hero.tsx` — full-screen landing with orbit rings, central sun, three planet nav nodes
+  - `TechnicalStack.tsx` — three-column skills grid (Frontend / Backend / Tools)
+  - `Projects.tsx` — project card grid
+  - `Footer.tsx` — bottom bar
+  - `ProgressIndicator.tsx` — fixed right-side scroll dots
+- `src/index.css` — Tailwind directives + custom CSS classes (`star-field`, `orbit-path`, `material-symbols-outlined`)
+- `tailwind.config.js` — full custom color palette (surface-*, primary, secondary, tertiary tokens) and font families
 
-## Deployment
+## Design tokens
 
-Configured for Vercel (auto-detects Vite). Three.js is code-split into a separate chunk.
+Colors follow a Material You dark scheme. Key tokens: `primary` (#cc97ff purple), `secondary` (#00fbfb cyan), `tertiary` (#ff51fa pink), `background`/`surface-*` (near-black). All defined in `tailwind.config.js`.
