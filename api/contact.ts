@@ -1,17 +1,22 @@
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+export const config = { runtime: "edge" };
 
-export default async function handler(req: any, res: any) {
+export default async function handler(req: Request) {
   if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
+    return new Response("Method not allowed", { status: 405 });
   }
 
-  const { name, email, message } = req.body;
+  const { name, email, message } = await req.json();
 
   if (!name || !email || !message) {
-    return res.status(400).json({ error: "Missing required fields" });
+    return new Response(JSON.stringify({ error: "Missing required fields" }), {
+      status: 400,
+      headers: { "Content-Type": "application/json" },
+    });
   }
+
+  const resend = new Resend(process.env.RESEND_API_KEY);
 
   const { error } = await resend.emails.send({
     from: "Alex <contact@alexshepherd.dev>",
@@ -27,8 +32,14 @@ export default async function handler(req: any, res: any) {
   });
 
   if (error) {
-    return res.status(500).json({ error: "Failed to send email" });
+    return new Response(JSON.stringify({ error: "Failed to send email" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
   }
 
-  return res.status(200).json({ success: true });
+  return new Response(JSON.stringify({ success: true }), {
+    status: 200,
+    headers: { "Content-Type": "application/json" },
+  });
 }
