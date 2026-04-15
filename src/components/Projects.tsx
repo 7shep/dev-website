@@ -5,15 +5,18 @@ type Project = {
   title: string;
   image: string;
   alt: string;
+  url: string;
+  github: string;
 };
 
 const projects: Project[] = [
   {
     category: "Discord Analytics Bot",
     title: "Project: Andromeda",
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuC7ExTQHtu5yz2rZv8Jl_e41eTz6qxdi9cXIPM1SL8moijLe2SoXxGqvkhCEcuxGmPlhKkPnMR5N7Lk7UQcs_r3gOmUOFO5az7hf17WQixIulTIoBYMYQvVL8FlUw6g_i79hbZR1danf4VlWZ-Vqr4-bqw1vx27R4VE5_B1jqYoxG149XuYZgyFcJU8sgG8g9Ks_-4r8ixSFXIWN8IvRldytlapRoVcPr2Q0dWU-V3a4tV3RNtyQ3XKW5YSheL9_Fd3aWlqXoGH0nvD",
-    alt: "abstract technological interface with glowing circuits",
+    image: "./assets/andromeda-galaxy-infrared-1024x880.jpg",
+    alt: "andromeda galaxy",
+    url: "https://github.com/7shep/discord-analytics",
+    github: "https://discord-analytics-eight.vercel.app",
   },
   {
     category: "Queens Web Development Club",
@@ -21,6 +24,8 @@ const projects: Project[] = [
     image:
       "https://lh3.googleusercontent.com/aida-public/AB6AXuDBIOFAIfiA0TyrCZWLw55VFcBY4PKr3535bJYAb4m0EelNx8LZ4FDvCfByg13SadPv-YL3n-XMIr-x2CNNodvAnkNnQvHh2qeTo-jwmBWQmw9g7me5lMskTdr3GyWIzbedS0Fa60we9FBCoaxhoCwAeI9VfQu4rRE9_7M61gpiG7ghS0uO74BykpLH24nEkZhqPldztZVzYXiHDz988ewUMumbDz78waNrSmAXFT8tUxUgxZPmxoBXwjzFguB8PGrvPNmhqm9Zp8fJ",
     alt: "visualization of complex mathematical geometry with glowing golden lines",
+    url: "https://qweb.dev/education",
+    github: "https://github.com/queens-web-development-club/qweb-main-2024",
   },
 ];
 
@@ -28,7 +33,7 @@ export default function Projects() {
   const { ref, isVisible } = useReveal();
 
   return (
-    <section id="projects" className="min-h-screen px-12 md:px-32 py-32">
+    <section id="projects" className="min-h-screen px-12 md:px-32 py-32 bg-surface-container-low/30">
       <div className="text-right mb-24" ref={ref}>
         <h2 className={`text-5xl md:text-7xl font-headline font-bold mt-6 reveal${isVisible ? " visible" : ""}`}>
           Digital <span className="text-primary">Constellations</span>.
@@ -55,12 +60,20 @@ export default function Projects() {
                 {project.title}
               </h4>
               <div className="flex gap-4">
-                <span className="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer transition-colors">
-                  link
-                </span>
-                <span className="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer transition-colors">
-                  code
-                </span>
+                {project.url && (
+                  <a href={project.url} target="_blank" rel="noreferrer">
+                    <span className="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer transition-colors">
+                      link
+                    </span>
+                  </a>
+                )}
+                {project.github && (
+                  <a href={project.github} target="_blank" rel="noreferrer">
+                    <span className="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer transition-colors">
+                      code
+                    </span>
+                  </a>
+                )}
               </div>
             </div>
           </div>

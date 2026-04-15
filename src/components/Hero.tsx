@@ -62,7 +62,7 @@ export default function Hero() {
             className="font-label text-xs tracking-[0.5em] text-secondary mt-4 uppercase"
             style={{ animation: "hero-fade-in 0.8s ease-out 0.5s both" }}
           >
-            future software engineer
+            Based in Elora, Ontario.
           </p>
           <div
             className="flex items-center justify-center gap-3 mt-6 font-label text-[11px] tracking-widest uppercase text-on-surface-variant"
