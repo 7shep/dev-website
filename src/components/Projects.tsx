@@ -1,3 +1,5 @@
+import { useReveal } from "../hooks/useReveal";
+
 type Project = {
   category: string;
   title: string;
@@ -23,27 +25,27 @@ const projects: Project[] = [
 ];
 
 export default function Projects() {
+  const { ref, isVisible } = useReveal();
+
   return (
-    <section id="projects" className="min-h-screen px-12 md:px-32 py-32 bg-surface-container-low/30">
-      <div className="text-right mb-24">
-        {/* <span className="font-label text-primary tracking-[0.4em] uppercase text-xs">
-          Sector 02: Deployments
-        </span> */}
-        <h2 className="text-5xl md:text-7xl font-headline font-bold mt-6">
+    <section id="projects" className="min-h-screen px-12 md:px-32 py-32">
+      <div className="text-right mb-24" ref={ref}>
+        <h2 className={`text-5xl md:text-7xl font-headline font-bold mt-6 reveal${isVisible ? " visible" : ""}`}>
           Digital <span className="text-primary">Constellations</span>.
         </h2>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-        {projects.map((project) => (
+        {projects.map((project, i) => (
           <div
             key={project.title}
-            className="group relative overflow-hidden rounded-2xl bg-surface-container-highest aspect-video"
+            className={`group relative overflow-hidden rounded-2xl bg-surface-container-highest aspect-video reveal${i > 0 ? " reveal-delay-1" : ""}${isVisible ? " visible" : ""}`}
           >
             <img
               className="w-full h-full object-cover opacity-40 group-hover:scale-105 group-hover:opacity-60 transition-all duration-700"
               src={project.image}
               alt={project.alt}
+              loading="lazy"
             />
             <div className="absolute inset-0 p-8 flex flex-col justify-end bg-gradient-to-t from-surface-container-lowest to-transparent">
               <span className="text-[10px] font-label text-primary tracking-widest uppercase mb-2">

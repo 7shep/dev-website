@@ -24,18 +24,21 @@ export default function Hero() {
   return (
     <section className="relative h-screen flex items-center justify-center">
       {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-tr from-surface-container-lowest via-surface-container-lowest to-primary/5" />
+      {/* Background layer removed for seamless page transition */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[120px]" />
 
       {/* Orbit Rings */}
-      <div className="orbit-path w-[350px] h-[350px] opacity-40" />
-      <div className="orbit-path w-[550px] h-[550px] opacity-25" />
-      <div className="orbit-path w-[800px] h-[800px] opacity-10" />
+      <div className="orbit-path w-[350px] h-[350px] opacity-40" style={{ animation: "orbit-rotate 60s linear infinite" }} />
+      <div className="orbit-path w-[550px] h-[550px] opacity-25" style={{ animation: "orbit-rotate 90s linear infinite reverse" }} />
+      <div className="orbit-path w-[800px] h-[800px] opacity-10" style={{ animation: "orbit-rotate 120s linear infinite" }} />
 
       {/* Central Sun */}
       <div className="relative z-10 flex flex-col items-center">
         {/* Spinning gradient border ring */}
-        <div className="w-32 h-32 rounded-full p-[2px] sun-ring group cursor-pointer">
+        <div
+          className="w-32 h-32 rounded-full p-[2px] sun-ring group cursor-pointer"
+          style={{ animation: "sun-spin 4s linear infinite, sun-pulse 3s ease-in-out infinite, hero-fade-in 0.8s ease-out both" }}
+        >
           {/* Counter-rotate so the inner image stays still */}
           <div
             className="w-full h-full rounded-full bg-surface-container-lowest flex items-center justify-center overflow-hidden"
@@ -49,13 +52,22 @@ export default function Hero() {
           </div>
         </div>
         <div className="mt-8 text-center">
-          <h1 className="text-6xl md:text-8xl font-headline font-bold tracking-[-0.05em] text-on-surface">
+          <h1
+            className="text-6xl md:text-8xl font-headline font-bold tracking-[-0.05em] text-on-surface"
+            style={{ animation: "hero-fade-in 0.8s ease-out 0.3s both" }}
+          >
             ALEX SHEPHERD
           </h1>
-          <p className="font-label text-xs tracking-[0.5em] text-secondary mt-4 uppercase">
+          <p
+            className="font-label text-xs tracking-[0.5em] text-secondary mt-4 uppercase"
+            style={{ animation: "hero-fade-in 0.8s ease-out 0.5s both" }}
+          >
             future software engineer
           </p>
-          <div className="flex items-center justify-center gap-3 mt-6 font-label text-[11px] tracking-widest uppercase text-on-surface-variant">
+          <div
+            className="flex items-center justify-center gap-3 mt-6 font-label text-[11px] tracking-widest uppercase text-on-surface-variant"
+            style={{ animation: "hero-fade-in 0.8s ease-out 0.7s both" }}
+          >
             <a
               href="https://github.com/7shep"
               target="_blank"
@@ -80,12 +92,25 @@ export default function Hero() {
             >
               Contact Me
             </button>
+            <span className="text-outline-variant">||</span>
+            <a
+              href="./assets/Alex_Shepherd_resume_202526.pdf"
+              target="_blank"
+              rel="noreferrer"
+              className="hover:text-primary transition-colors duration-200"
+            >
+              Resume
+            </a>
           </div>
         </div>
       </div>
 
       {/* Planet 1: Skills */}
-      <div onClick={() => scrollTo("skills")} className="absolute top-[20%] left-[25%] z-20 group cursor-pointer transition-transform duration-500 hover:scale-110">
+      <div
+        onClick={() => scrollTo("skills")}
+        className="absolute top-[20%] left-[25%] z-20 group cursor-pointer transition-transform duration-500 hover:scale-110"
+        style={{ animation: "float-y 4s ease-in-out infinite" }}
+      >
         <div className="flex flex-col items-center gap-4">
           <div className="w-16 h-16 rounded-full bg-surface-variant backdrop-blur-xl border border-secondary/20 flex items-center justify-center shadow-[0_0_30px_rgba(0,251,251,0.2)]">
             <span className="material-symbols-outlined text-secondary text-2xl">terminal</span>
@@ -98,7 +123,11 @@ export default function Hero() {
       </div>
 
       {/* Planet 2: Projects */}
-      <div onClick={() => scrollTo("projects")} className="absolute bottom-[25%] right-[20%] z-20 group cursor-pointer transition-transform duration-500 hover:scale-110">
+      <div
+        onClick={() => scrollTo("projects")}
+        className="absolute bottom-[25%] right-[20%] z-20 group cursor-pointer transition-transform duration-500 hover:scale-110"
+        style={{ animation: "float-xy 5s ease-in-out infinite" }}
+      >
         <div className="flex flex-col items-center gap-4">
           <div className="w-20 h-20 rounded-full bg-surface-variant backdrop-blur-xl border border-primary/20 flex items-center justify-center shadow-[0_0_30px_rgba(204,151,255,0.2)]">
             <span className="material-symbols-outlined text-primary text-3xl">deployed_code</span>
@@ -124,7 +153,7 @@ export default function Hero() {
       </div> */}
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-12 flex flex-col items-center gap-3">
+      <div className="absolute bottom-12 flex flex-col items-center gap-3" style={{ animation: "scroll-fade 2s ease-in-out infinite" }}>
         <span className="font-label text-[9px] tracking-[0.3em] text-on-surface-variant uppercase">
           Scroll to Explore
         </span>

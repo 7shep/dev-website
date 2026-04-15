@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useReveal } from "../hooks/useReveal";
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const { ref, isVisible } = useReveal();
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -14,7 +16,7 @@ export default function Contact() {
 
   return (
     <section id="contact" className="px-6 md:px-24 py-32 flex justify-center">
-      <div className="w-full max-w-2xl bg-surface-container-low border border-secondary/20 rounded-2xl p-8 md:p-10">
+      <div ref={ref} className={`w-full max-w-2xl bg-surface-container-low border border-secondary/20 rounded-2xl p-8 md:p-10 reveal${isVisible ? " visible" : ""}`}>
         {/* Header */}
         <div className="flex items-center gap-3 mb-8">
           <span className="w-2.5 h-2.5 rounded-full bg-secondary shadow-[0_0_8px_rgba(0,251,251,0.8)] inline-block" />
@@ -35,7 +37,7 @@ export default function Contact() {
               onChange={handleChange}
               placeholder="John Doe"
               autoComplete="off"
-              className="w-full bg-transparent border border-outline-variant rounded-lg px-4 py-3 text-sm font-mono text-on-surface placeholder:text-outline/50 focus:outline-none focus:border-secondary/60 transition-colors duration-200"
+              className="w-full bg-transparent border border-outline-variant rounded-lg px-4 py-3 text-sm font-mono text-on-surface placeholder:text-outline/50 focus:outline-none focus:border-secondary/60 focus:shadow-[0_0_12px_rgba(0,251,251,0.1)] transition-all duration-200"
             />
           </div>
 
@@ -51,7 +53,7 @@ export default function Contact() {
               onChange={handleChange}
               placeholder="john@example.com"
               autoComplete="off"
-              className="w-full bg-transparent border border-outline-variant rounded-lg px-4 py-3 text-sm font-mono text-on-surface placeholder:text-outline/50 focus:outline-none focus:border-secondary/60 transition-colors duration-200"
+              className="w-full bg-transparent border border-outline-variant rounded-lg px-4 py-3 text-sm font-mono text-on-surface placeholder:text-outline/50 focus:outline-none focus:border-secondary/60 focus:shadow-[0_0_12px_rgba(0,251,251,0.1)] transition-all duration-200"
             />
           </div>
 

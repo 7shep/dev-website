@@ -1,3 +1,5 @@
+import { useReveal } from "../hooks/useReveal";
+
 type SkillChip = { icon: string; label: string; fill?: boolean };
 
 type SkillColumn = {
@@ -62,10 +64,12 @@ const columns: SkillColumn[] = [
 ];
 
 export default function TechnicalStack() {
+  const { ref, isVisible } = useReveal();
+
   return (
     <section id="skills" className="min-h-screen px-6 md:px-24 py-32 flex flex-col justify-center">
-      <div className="max-w-7xl mx-auto w-full">
-        <div className="mb-16">
+      <div className="max-w-7xl mx-auto w-full" ref={ref}>
+        <div className={`mb-16 reveal${isVisible ? " visible" : ""}`}>
           <h2 className="text-6xl md:text-8xl font-headline font-bold tracking-tighter text-on-surface">
             TECHNICAL_STACK
           </h2>
@@ -73,8 +77,8 @@ export default function TechnicalStack() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {columns.map((col) => (
-            <div key={col.heading} className="space-y-6">
+          {columns.map((col, i) => (
+            <div key={col.heading} className={`space-y-6 reveal${i > 0 ? ` reveal-delay-${i}` : ""}${isVisible ? " visible" : ""}`}>
               <div className="flex items-center gap-3">
                 <span
                   className={`material-symbols-outlined ${col.color}`}
@@ -92,7 +96,7 @@ export default function TechnicalStack() {
                 {col.skills.map((skill) => (
                   <div
                     key={skill.label}
-                    className="bg-surface-container-highest/60 p-4 rounded-lg flex items-center gap-3 border border-white/5"
+                    className="bg-surface-container-highest/60 p-4 rounded-lg flex items-center gap-3 border border-white/5 hover:-translate-y-0.5 transition-transform duration-300"
                   >
                     <span
                       className={`material-symbols-outlined ${col.chipColor} text-sm`}
