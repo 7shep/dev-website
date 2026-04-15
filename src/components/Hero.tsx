@@ -88,15 +88,14 @@ export default function Hero() {
             <span className="text-outline-variant">||</span>
             <button
               onClick={() => scrollTo("contact")}
-              className="hover:text-primary transition-colors duration-200 cursor-pointer"
+              className="uppercase hover:text-primary transition-colors duration-200 cursor-pointer"
             >
               Contact Me
             </button>
             <span className="text-outline-variant">||</span>
             <a
-              href="./assets/Alex_Shepherd_resume_202526.pdf"
-              target="_blank"
-              rel="noreferrer"
+              href="/assets/Alex_Shepherd_Resume_202526.pdf"
+              download
               className="hover:text-primary transition-colors duration-200"
             >
               Resume
