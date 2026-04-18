@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/andromeda/:path*",
+      "destination": "https://discord-analytics-eight.vercel.app/:path*"
+    }
+  ]
+}

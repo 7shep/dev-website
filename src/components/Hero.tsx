@@ -94,7 +94,7 @@ export default function Hero() {
             </button>
             <span className="text-outline-variant">||</span>
             <a
-              href="/assets/Alex_Shepherd_Resume_202526.pdf"
+              href="/assets/Alex_Shepherd_Resume.pdf"
               download
               className="hover:text-primary transition-colors duration-200"
             >
