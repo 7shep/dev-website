@@ -124,7 +124,7 @@ export default function Hero() {
       {/* Planet 1: Skills */}
       <div
         onClick={() => scrollTo("skills")}
-        className="absolute top-[20%] left-[25%] z-20 group cursor-pointer transition-transform duration-500 hover:scale-110"
+        className="absolute top-[20%] left-[5%] sm:left-[25%] z-20 group cursor-pointer transition-transform duration-500 hover:scale-110"
         style={{ animation: "float-y 4s ease-in-out infinite" }}
       >
         <div className="flex flex-col items-center gap-2 md:gap-4">
@@ -141,7 +141,7 @@ export default function Hero() {
       {/* Planet 2: Projects */}
       <div
         onClick={() => scrollTo("projects")}
-        className="absolute bottom-[25%] right-[20%] z-20 group cursor-pointer transition-transform duration-500 hover:scale-110"
+        className="absolute bottom-[45%] right-[5%] sm:bottom-[25%] sm:right-[20%] z-20 group cursor-pointer transition-transform duration-500 hover:scale-110"
         style={{ animation: "float-xy 5s ease-in-out infinite" }}
       >
         <div className="flex flex-col items-center gap-2 md:gap-4">
@@ -158,7 +158,7 @@ export default function Hero() {
       {/* Planet 3: About Me */}
       <div
         onClick={() => scrollTo("about")}
-        className="absolute top-[35%] right-[30%] z-20 group cursor-pointer transition-transform duration-500 hover:scale-110"
+        className="absolute top-[35%] right-[8%] sm:right-[30%] z-20 group cursor-pointer transition-transform duration-500 hover:scale-110"
         style={{ animation: "float-y 6s ease-in-out infinite 1s" }}
       >
         <div className="flex flex-col items-center gap-2 md:gap-4">
