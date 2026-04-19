@@ -30,9 +30,9 @@ export default function Hero() {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(800px,100vw)] h-[min(800px,100vw)] bg-primary/5 rounded-full blur-[120px]" />
 
       {/* Orbit Rings */}
-      <div className="orbit-path w-[min(350px,44vw)] h-[min(350px,44vw)] opacity-40" style={{ animation: "orbit-rotate 60s linear infinite" }} />
-      <div className="orbit-path w-[min(550px,69vw)] h-[min(550px,69vw)] opacity-25" style={{ animation: "orbit-rotate 90s linear infinite reverse" }} />
-      <div className="orbit-path w-[min(800px,100vw)] h-[min(800px,100vw)] opacity-10" style={{ animation: "orbit-rotate 120s linear infinite" }} />
+      <div className="orbit-path w-[30vw] h-[30vw] sm:w-[min(350px,44vw)] sm:h-[min(350px,44vw)] opacity-40" style={{ animation: "orbit-rotate 60s linear infinite" }} />
+      <div className="orbit-path w-[48vw] h-[48vw] sm:w-[min(550px,69vw)] sm:h-[min(550px,69vw)] opacity-25" style={{ animation: "orbit-rotate 90s linear infinite reverse" }} />
+      <div className="orbit-path w-[70vw] h-[70vw] sm:w-[min(800px,100vw)] sm:h-[min(800px,100vw)] opacity-10" style={{ animation: "orbit-rotate 120s linear infinite" }} />
 
       {/* Central Sun */}
       <div className="relative z-10 flex flex-col items-center">
