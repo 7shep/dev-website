@@ -20,8 +20,6 @@ function scrollTo(id: string) {
   requestAnimationFrame(step);
 }
 
-import ParticleOrb from "./ParticleOrb";
-
 export default function Hero() {
   return (
     <section className="relative h-screen flex items-center justify-center">
@@ -46,7 +44,11 @@ export default function Hero() {
             className="w-full h-full rounded-full bg-surface-container-lowest flex items-center justify-center overflow-hidden"
             style={{ animation: "sun-spin 4s linear infinite reverse" }}
           >
-            <ParticleOrb />
+            <img
+              className="w-full h-full object-cover opacity-60 grayscale group-hover:grayscale-0 transition-all duration-700"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAuGqVTFcefjqJfP49o_5YsvrceLWqUQqas8RJK1yjGTXG97grsUGImFGGfm6hxDQU-Zrk_9In5uj-3PVgMoGx1LlZvVxWCDonGoFXU_qULeQSWmHzICh_38bZbATnxevcehX5ZKKwJDhr9I6dKiB5TY5NfHgtvFL1lUvZpyIxKj-uXRFZYD9fiGX_Hv0KXrCyj5D-1mQMC6-pgzfJm3BWGWH5QeFxGli0MJCitoHmChJh0IbShVpKuy9p_P_S2gX9J1sO9I1hElp90"
+              alt="cosmic nebula"
+            />
           </div>
         </div>
         <div className="mt-8 text-center">
