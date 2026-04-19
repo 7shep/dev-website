@@ -19,7 +19,7 @@ export default function About() {
               My name is Alex. I'm a 19-year-old student studying Computing with a sub-plan in Artificial Intelligence at Queen's University in Kingston, Ontario.
             </p>
             <p className="text-xl md:text-2xl text-on-surface-variant leading-relaxed font-antiqua">
-              In my free time I enjoy anything sport-related, and coding side projects that make my life more productive.
+              In my free time I enjoy anything sport-related, listening to music, and coding side projects that showcase my talents.
             </p>
             <a
               href="/assets/Alex_Shepherd_Resume.pdf"

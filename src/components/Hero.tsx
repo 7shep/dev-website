@@ -64,6 +64,7 @@ export default function Hero() {
             className="font-label text-xs tracking-[0.5em] text-secondary mt-4 uppercase"
             style={{ animation: "hero-fade-in 0.8s ease-out 0.5s both" }}
           >
+            I'M A
             <Typewriter
               text={["Full-Stack Developer", "Student", "Problem Solver", "Tech Enthusiast"]}
               speed={60}
