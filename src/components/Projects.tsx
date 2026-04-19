@@ -49,7 +49,7 @@ const projects: Project[] = [
     description:
       "Education landing page for Queen's Web Development Club — a hub surfacing workshop content and learning paths for club members.",
     problem:
-      "TODO: one-sentence on why the education page was needed (e.g., centralizing scattered workshop material, onboarding new members, etc.)",
+      "QWeb ran hands-on web dev tutorials but had no persistent home for the material. Members who missed a session had nowhere to catch up.",
     role: "Built the education page in React as part of the club's Next.js site.",
     stack: ["Next.js", "React"],
   },
