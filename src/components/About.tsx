@@ -47,7 +47,7 @@ export default function About() {
               <p className="font-antiqua text-xl text-on-surface">
                 Computing + AI
               </p>
-              <p className="text-xs text-on-surface-variant mt-1">
+              <p className="font-antiqua text-xl text-on-surface">
                 Queen's University
               </p>
             </div>
@@ -55,7 +55,7 @@ export default function About() {
               <span className="block text-[9px] font-label text-tertiary tracking-[0.3em] uppercase mb-2">
                 Interests
               </span>
-              <p className="text-sm text-on-surface-variant leading-relaxed">
+              <p className="font-antiqua text-xl text-on-surface">
                 Sports, side projects, productivity tools.
               </p>
             </div>
