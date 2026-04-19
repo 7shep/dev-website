@@ -59,9 +59,9 @@ export default function Projects() {
   const { ref, isVisible } = useReveal();
 
   return (
-    <section id="projects" className="min-h-screen px-12 md:px-32 py-32 bg-surface-container-low/30">
+    <section id="projects" className="min-h-screen px-4 sm:px-8 md:px-32 py-32 bg-surface-container-low/30">
       <div className="text-right mb-24" ref={ref}>
-        <h2 className={`text-5xl md:text-7xl font-headline font-bold mt-6 reveal${isVisible ? " visible" : ""}`}>
+        <h2 className={`text-3xl sm:text-4xl md:text-7xl font-headline font-bold mt-6 reveal${isVisible ? " visible" : ""}`}>
           Digital <span className="text-primary">Constellations</span>.
         </h2>
       </div>
@@ -80,7 +80,7 @@ export default function Projects() {
                 loading="lazy"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-surface-container-highest via-surface-container-highest/60 to-transparent" />
-              <div className="absolute inset-x-0 bottom-0 p-8">
+              <div className="absolute inset-x-0 bottom-0 p-4 sm:p-6 md:p-8">
                 <span className="text-[10px] font-label text-primary tracking-widest uppercase">
                   {project.category}
                 </span>
@@ -90,7 +90,7 @@ export default function Projects() {
               </div>
             </div>
 
-            <div className="flex flex-col gap-5 p-8">
+            <div className="flex flex-col gap-5 p-4 sm:p-6 md:p-8">
               <p className="text-sm text-on-surface-variant leading-relaxed">
                 {project.description}
               </p>

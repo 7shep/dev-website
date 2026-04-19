@@ -70,7 +70,7 @@ export default function TechnicalStack() {
     <section id="skills" className="min-h-screen px-6 md:px-24 py-32 flex flex-col justify-center">
       <div className="max-w-7xl mx-auto w-full" ref={ref}>
         <div className={`mb-16 reveal${isVisible ? " visible" : ""}`}>
-          <h2 className="text-6xl md:text-8xl font-headline font-bold tracking-tighter text-on-surface">
+          <h2 className="text-3xl sm:text-5xl md:text-8xl font-headline font-bold tracking-tighter text-on-surface">
             TECHNICAL_STACK
           </h2>
           <div className="w-24 md:w-48 h-2 bg-secondary mt-4" />
@@ -91,7 +91,7 @@ export default function TechnicalStack() {
                 </h3>
               </div>
               <div
-                className={`bg-surface-container-high/40 backdrop-blur-md border ${col.borderColor} rounded-2xl p-8 grid grid-cols-2 gap-4`}
+                className={`bg-surface-container-high/40 backdrop-blur-md border ${col.borderColor} rounded-2xl p-4 sm:p-6 md:p-8 grid grid-cols-1 sm:grid-cols-2 gap-4`}
               >
                 {col.skills.map((skill) => (
                   <div

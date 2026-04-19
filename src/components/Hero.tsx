@@ -27,12 +27,12 @@ export default function Hero() {
     <section className="relative h-screen flex items-center justify-center">
       {/* Background */}
       {/* Background layer removed for seamless page transition */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[120px]" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(800px,100vw)] h-[min(800px,100vw)] bg-primary/5 rounded-full blur-[120px]" />
 
       {/* Orbit Rings */}
-      <div className="orbit-path w-[350px] h-[350px] opacity-40" style={{ animation: "orbit-rotate 60s linear infinite" }} />
-      <div className="orbit-path w-[550px] h-[550px] opacity-25" style={{ animation: "orbit-rotate 90s linear infinite reverse" }} />
-      <div className="orbit-path w-[800px] h-[800px] opacity-10" style={{ animation: "orbit-rotate 120s linear infinite" }} />
+      <div className="orbit-path w-[min(350px,44vw)] h-[min(350px,44vw)] opacity-40" style={{ animation: "orbit-rotate 60s linear infinite" }} />
+      <div className="orbit-path w-[min(550px,69vw)] h-[min(550px,69vw)] opacity-25" style={{ animation: "orbit-rotate 90s linear infinite reverse" }} />
+      <div className="orbit-path w-[min(800px,100vw)] h-[min(800px,100vw)] opacity-10" style={{ animation: "orbit-rotate 120s linear infinite" }} />
 
       {/* Central Sun */}
       <div className="relative z-10 flex flex-col items-center">
@@ -55,13 +55,13 @@ export default function Hero() {
         </div>
         <div className="mt-8 text-center">
           <h1
-            className="text-6xl md:text-8xl font-headline font-bold tracking-[-0.05em] text-on-surface"
+            className="text-4xl sm:text-5xl md:text-8xl font-headline font-bold tracking-[-0.05em] text-on-surface"
             style={{ animation: "hero-fade-in 0.8s ease-out 0.3s both" }}
           >
             ALEX SHEPHERD
           </h1>
           <div
-            className="font-label text-xs tracking-[0.5em] text-secondary mt-4 uppercase"
+            className="font-label text-xs tracking-[0.5em] text-secondary mt-4 uppercase px-4"
             style={{ animation: "hero-fade-in 0.8s ease-out 0.5s both" }}
           >
             I'M A
@@ -76,7 +76,7 @@ export default function Hero() {
             />
           </div>
           <p
-            className="font-label text-xs tracking-[0.5em] text-secondary mt-4 uppercase"
+            className="font-label text-xs tracking-[0.5em] text-secondary mt-4 uppercase px-4"
             style={{ animation: "hero-fade-in 0.8s ease-out 0.6s both" }}
           >
             Based in Elora, Ontario.
@@ -127,13 +127,13 @@ export default function Hero() {
         className="absolute top-[20%] left-[25%] z-20 group cursor-pointer transition-transform duration-500 hover:scale-110"
         style={{ animation: "float-y 4s ease-in-out infinite" }}
       >
-        <div className="flex flex-col items-center gap-4">
-          <div className="w-16 h-16 rounded-full bg-surface-variant backdrop-blur-xl border border-secondary/20 flex items-center justify-center shadow-[0_0_30px_rgba(0,251,251,0.2)]">
-            <span className="material-symbols-outlined text-secondary text-2xl">terminal</span>
+        <div className="flex flex-col items-center gap-2 md:gap-4">
+          <div className="w-10 h-10 md:w-16 md:h-16 rounded-full bg-surface-variant backdrop-blur-xl border border-secondary/20 flex items-center justify-center shadow-[0_0_30px_rgba(0,251,251,0.2)]">
+            <span className="material-symbols-outlined text-secondary text-base md:text-2xl">terminal</span>
           </div>
           <div className="text-center">
-            <span className="font-headline text-[10px] tracking-widest text-secondary block">STATION 01</span>
-            <h3 className="font-headline text-lg font-bold text-on-surface">Skills</h3>
+            <span className="font-headline text-[8px] md:text-[10px] tracking-widest text-secondary block">STATION 01</span>
+            <h3 className="font-headline text-xs md:text-lg font-bold text-on-surface">Skills</h3>
           </div>
         </div>
       </div>
@@ -144,13 +144,13 @@ export default function Hero() {
         className="absolute bottom-[25%] right-[20%] z-20 group cursor-pointer transition-transform duration-500 hover:scale-110"
         style={{ animation: "float-xy 5s ease-in-out infinite" }}
       >
-        <div className="flex flex-col items-center gap-4">
-          <div className="w-20 h-20 rounded-full bg-surface-variant backdrop-blur-xl border border-primary/20 flex items-center justify-center shadow-[0_0_30px_rgba(204,151,255,0.2)]">
-            <span className="material-symbols-outlined text-primary text-3xl">deployed_code</span>
+        <div className="flex flex-col items-center gap-2 md:gap-4">
+          <div className="w-12 h-12 md:w-20 md:h-20 rounded-full bg-surface-variant backdrop-blur-xl border border-primary/20 flex items-center justify-center shadow-[0_0_30px_rgba(204,151,255,0.2)]">
+            <span className="material-symbols-outlined text-primary text-lg md:text-3xl">deployed_code</span>
           </div>
           <div className="text-center">
-            <span className="font-headline text-[10px] tracking-widest text-primary block">STATION 02</span>
-            <h3 className="font-headline text-lg font-bold text-on-surface">Projects</h3>
+            <span className="font-headline text-[8px] md:text-[10px] tracking-widest text-primary block">STATION 02</span>
+            <h3 className="font-headline text-xs md:text-lg font-bold text-on-surface">Projects</h3>
           </div>
         </div>
       </div>
@@ -161,13 +161,13 @@ export default function Hero() {
         className="absolute top-[35%] right-[30%] z-20 group cursor-pointer transition-transform duration-500 hover:scale-110"
         style={{ animation: "float-y 6s ease-in-out infinite 1s" }}
       >
-        <div className="flex flex-col items-center gap-4">
-          <div className="w-14 h-14 rounded-full bg-surface-variant backdrop-blur-xl border border-tertiary/20 flex items-center justify-center shadow-[0_0_30px_rgba(255,81,250,0.2)]">
-            <span className="material-symbols-outlined text-tertiary text-xl">fingerprint</span>
+        <div className="flex flex-col items-center gap-2 md:gap-4">
+          <div className="w-9 h-9 md:w-14 md:h-14 rounded-full bg-surface-variant backdrop-blur-xl border border-tertiary/20 flex items-center justify-center shadow-[0_0_30px_rgba(255,81,250,0.2)]">
+            <span className="material-symbols-outlined text-tertiary text-sm md:text-xl">fingerprint</span>
           </div>
           <div className="text-center">
-            <span className="font-headline text-[10px] tracking-widest text-tertiary block">STATION 03</span>
-            <h3 className="font-headline text-lg font-bold text-on-surface">About Me</h3>
+            <span className="font-headline text-[8px] md:text-[10px] tracking-widest text-tertiary block">STATION 03</span>
+            <h3 className="font-headline text-xs md:text-lg font-bold text-on-surface">About Me</h3>
           </div>
         </div>
       </div>

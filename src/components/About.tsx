@@ -4,16 +4,16 @@ export default function About() {
   const { ref, isVisible } = useReveal();
 
   return (
-    <section id="about" className="min-h-screen px-6 md:px-24 py-32 flex flex-col justify-center">
+    <section id="about" className="min-h-screen px-6 md:px-24 py-16 md:py-32 flex flex-col justify-center">
       <div className="max-w-7xl mx-auto w-full" ref={ref}>
         <div className={`mb-16 reveal${isVisible ? " visible" : ""}`}>
-          <h2 className="text-6xl md:text-8xl font-antiqua font-bold tracking-tighter text-on-surface">
+          <h2 className="text-3xl sm:text-5xl md:text-8xl font-antiqua font-bold tracking-tighter text-on-surface">
             ABOUT
           </h2>
           <div className="w-24 md:w-48 h-2 bg-tertiary mt-4" />
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-12">
           <div className={`lg:col-span-2 space-y-6 reveal${isVisible ? " visible" : ""}`}>
             <p className="text-xl md:text-2xl text-on-surface-variant leading-relaxed font-antiqua">
               My name is Alex. I'm a 19-year-old student studying Computing with a sub-plan in Artificial Intelligence at Queen's University in Kingston, Ontario.

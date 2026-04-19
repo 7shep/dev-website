@@ -34,7 +34,7 @@ export default function Contact() {
   const disabled = status === "loading" || status === "success";
 
   return (
-    <section id="contact" className="px-6 md:px-24 py-32 flex justify-center">
+    <section id="contact" className="px-6 md:px-24 py-16 md:py-32 flex justify-center">
       <div ref={ref} className={`w-full max-w-2xl bg-surface-container-low border border-secondary/20 rounded-2xl p-8 md:p-10 reveal${isVisible ? " visible" : ""}`}>
         {/* Header */}
         <div className="flex items-center gap-3 mb-8">
