@@ -71,7 +71,7 @@ export default function Hero() {
             style={{ animation: "hero-fade-in 0.8s ease-out 0.6s both" }}
           >
             <Typewriter
-              text={["Full-Stack Developer", "Software Engineer", "Problem Solver"]}
+              text={["Full-Stack Developer", "Student", "Problem Solver", "Tech Enthusiast"]}
               speed={60}
               deleteSpeed={35}
               waitTime={2000}
