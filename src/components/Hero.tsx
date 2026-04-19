@@ -20,6 +20,8 @@ function scrollTo(id: string) {
   requestAnimationFrame(step);
 }
 
+import heroImage from "../assets/hero.png";
+
 export default function Hero() {
   return (
     <section className="relative h-screen flex items-center justify-center">
@@ -46,7 +48,7 @@ export default function Hero() {
           >
             <img
               className="w-full h-full object-cover opacity-60 grayscale group-hover:grayscale-0 transition-all duration-700"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAuGqVTFcefjqJfP49o_5YsvrceLWqUQqas8RJK1yjGTXG97grsUGImFGGfm6hxDQU-Zrk_9In5uj-3PVgMoGx1LlZvVxWCDonGoFXU_qULeQSWmHzICh_38bZbATnxevcehX5ZKKwJDhr9I6dKiB5TY5NfHgtvFL1lUvZpyIxKj-uXRFZYD9fiGX_Hv0KXrCyj5D-1mQMC6-pgzfJm3BWGWH5QeFxGli0MJCitoHmChJh0IbShVpKuy9p_P_S2gX9J1sO9I1hElp90"
+              src={heroImage}
               alt="cosmic nebula"
             />
           </div>
@@ -139,7 +141,11 @@ export default function Hero() {
       </div>
 
       {/* Planet 3: About Me */}
-      {/* <div onClick={() => scrollTo("about")} className="absolute top-[35%] right-[25%] z-20 group cursor-pointer transition-transform duration-500 hover:scale-110">
+      <div
+        onClick={() => scrollTo("about")}
+        className="absolute top-[35%] right-[30%] z-20 group cursor-pointer transition-transform duration-500 hover:scale-110"
+        style={{ animation: "float-y 6s ease-in-out infinite 1s" }}
+      >
         <div className="flex flex-col items-center gap-4">
           <div className="w-14 h-14 rounded-full bg-surface-variant backdrop-blur-xl border border-tertiary/20 flex items-center justify-center shadow-[0_0_30px_rgba(255,81,250,0.2)]">
             <span className="material-symbols-outlined text-tertiary text-xl">fingerprint</span>
@@ -149,7 +155,7 @@ export default function Hero() {
             <h3 className="font-headline text-lg font-bold text-on-surface">About Me</h3>
           </div>
         </div>
-      </div> */}
+      </div>
 
       {/* Scroll Indicator */}
       <div className="absolute bottom-12 flex flex-col items-center gap-3" style={{ animation: "scroll-fade 2s ease-in-out infinite" }}>
