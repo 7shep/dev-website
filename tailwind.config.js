@@ -67,6 +67,7 @@ export default {
         headline: ["Space Grotesk", "sans-serif"],
         body: ["Inter", "sans-serif"],
         label: ["Space Grotesk", "sans-serif"],
+        antiqua: ["Modern Antiqua", "serif"],
       },
     },
   },
