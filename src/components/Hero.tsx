@@ -1,3 +1,5 @@
+import { Typewriter } from "./ui/typewriter"
+
 function scrollTo(id: string) {
   const target = document.getElementById(id);
   if (!target) return;
@@ -58,9 +60,24 @@ export default function Hero() {
           >
             ALEX SHEPHERD
           </h1>
-          <p
+          <div
             className="font-label text-xs tracking-[0.5em] text-secondary mt-4 uppercase"
             style={{ animation: "hero-fade-in 0.8s ease-out 0.5s both" }}
+          >
+            I'M A
+            <Typewriter
+              text={["Full-Stack Developer", "Student", "Problem Solver", "Tech Enthusiast"]}
+              speed={60}
+              deleteSpeed={35}
+              waitTime={2000}
+              cursorChar="_"
+              cursorClassName="text-secondary ml-0.5"
+              className="text-secondary"
+            />
+          </div>
+          <p
+            className="font-label text-xs tracking-[0.5em] text-secondary mt-4 uppercase"
+            style={{ animation: "hero-fade-in 0.8s ease-out 0.6s both" }}
           >
             Based in Elora, Ontario.
           </p>
@@ -139,7 +156,11 @@ export default function Hero() {
       </div>
 
       {/* Planet 3: About Me */}
-      {/* <div onClick={() => scrollTo("about")} className="absolute top-[35%] right-[25%] z-20 group cursor-pointer transition-transform duration-500 hover:scale-110">
+      <div
+        onClick={() => scrollTo("about")}
+        className="absolute top-[35%] right-[30%] z-20 group cursor-pointer transition-transform duration-500 hover:scale-110"
+        style={{ animation: "float-y 6s ease-in-out infinite 1s" }}
+      >
         <div className="flex flex-col items-center gap-4">
           <div className="w-14 h-14 rounded-full bg-surface-variant backdrop-blur-xl border border-tertiary/20 flex items-center justify-center shadow-[0_0_30px_rgba(255,81,250,0.2)]">
             <span className="material-symbols-outlined text-tertiary text-xl">fingerprint</span>
@@ -149,7 +170,7 @@ export default function Hero() {
             <h3 className="font-headline text-lg font-bold text-on-surface">About Me</h3>
           </div>
         </div>
-      </div> */}
+      </div>
 
       {/* Scroll Indicator */}
       <div className="absolute bottom-12 flex flex-col items-center gap-3" style={{ animation: "scroll-fade 2s ease-in-out infinite" }}>
