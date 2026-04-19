@@ -20,7 +20,7 @@ function scrollTo(id: string) {
   requestAnimationFrame(step);
 }
 
-import heroImage from "../assets/hero.png";
+import ParticleOrb from "./ParticleOrb";
 
 export default function Hero() {
   return (
@@ -46,11 +46,7 @@ export default function Hero() {
             className="w-full h-full rounded-full bg-surface-container-lowest flex items-center justify-center overflow-hidden"
             style={{ animation: "sun-spin 4s linear infinite reverse" }}
           >
-            <img
-              className="w-full h-full object-cover opacity-60 grayscale group-hover:grayscale-0 transition-all duration-700"
-              src={heroImage}
-              alt="cosmic nebula"
-            />
+            <ParticleOrb />
           </div>
         </div>
         <div className="mt-8 text-center">
