@@ -1,3 +1,5 @@
+import { Typewriter } from "./ui/typewriter"
+
 function scrollTo(id: string) {
   const target = document.getElementById(id);
   if (!target) return;
@@ -64,6 +66,20 @@ export default function Hero() {
           >
             Based in Elora, Ontario.
           </p>
+          <div
+            className="font-label text-sm tracking-widest text-on-surface-variant mt-2"
+            style={{ animation: "hero-fade-in 0.8s ease-out 0.6s both" }}
+          >
+            <Typewriter
+              text={["Full-Stack Developer", "Software Engineer", "Problem Solver"]}
+              speed={60}
+              deleteSpeed={35}
+              waitTime={2000}
+              cursorChar="_"
+              cursorClassName="text-primary ml-0.5"
+              className="text-on-surface-variant"
+            />
+          </div>
           <div
             className="flex items-center justify-center gap-3 mt-6 font-label text-[11px] tracking-widest uppercase text-on-surface-variant"
             style={{ animation: "hero-fade-in 0.8s ease-out 0.7s both" }}
