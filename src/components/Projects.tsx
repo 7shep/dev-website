@@ -25,7 +25,7 @@ const projects: Project[] = [
       "Full-stack analytics platform that tracks Discord server activity in real time and visualizes it through an interactive dashboard.",
     problem:
       "Discord admins have no native way to monitor engagement trends. Andromeda replaces manual scrolling with live metrics on member activity, message volume, and user contributions.",
-    role: "Sole developer — designed and built end-to-end.",
+    role: "Sole developer. Built everything from scratch including the bot, backend API, and frontend dashboard.",
     stack: [
       "TypeScript",
       "React",
