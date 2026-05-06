@@ -1,8 +1,12 @@
-{
+ {
     "rewrites": [
       {
+        "source": "/prospectpredictor",
+        "destination": "https://prospect-predictor-mlb.vercel.app/index.html"
+      },
+      {
         "source": "/prospectpredictor/:path*",
-        "destination": "prospect-predictor-mlb.vercel.app/:path*"
+        "destination": "https://prospect-predictor-mlb.vercel.app/:path*"
       }
     ]
   }
