@@ -30,9 +30,9 @@ export default function Hero() {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(800px,100vw)] h-[min(800px,100vw)] bg-primary/5 rounded-full blur-[120px]" />
 
       {/* Orbit Rings */}
-      <div className="orbit-path w-[30vw] h-[30vw] sm:w-[min(350px,44vw)] sm:h-[min(350px,44vw)] opacity-40" style={{ animation: "orbit-rotate 60s linear infinite" }} />
-      <div className="orbit-path w-[48vw] h-[48vw] sm:w-[min(550px,69vw)] sm:h-[min(550px,69vw)] opacity-25" style={{ animation: "orbit-rotate 90s linear infinite reverse" }} />
-      <div className="orbit-path w-[70vw] h-[70vw] sm:w-[min(800px,100vw)] sm:h-[min(800px,100vw)] opacity-10" style={{ animation: "orbit-rotate 120s linear infinite" }} />
+      <div className="orbit-path w-[min(350px,44vw)] h-[min(350px,44vw)] opacity-40" style={{ animation: "orbit-rotate 60s linear infinite" }} />
+      <div className="orbit-path w-[min(550px,69vw)] h-[min(550px,69vw)] opacity-25" style={{ animation: "orbit-rotate 90s linear infinite reverse" }} />
+      <div className="orbit-path w-[min(800px,100vw)] h-[min(800px,100vw)] opacity-10" style={{ animation: "orbit-rotate 120s linear infinite" }} />
 
       {/* Central Sun */}
       <div className="relative z-10 flex flex-col items-center">
@@ -66,7 +66,7 @@ export default function Hero() {
           >
             I'M A
             <Typewriter
-              text={["Full-Stack Developer", "Student", "Problem Solver", "Tech Enthusiast"]}
+              text={["Full-Stack Developer", "Student", "Problem Solver", "Tech Enthusiast", "Music Enthusiast", ""]}
               speed={60}
               deleteSpeed={35}
               waitTime={2000}
@@ -124,7 +124,7 @@ export default function Hero() {
       {/* Planet 1: Skills */}
       <div
         onClick={() => scrollTo("skills")}
-        className="absolute top-[20%] left-[5%] sm:left-[25%] z-20 group cursor-pointer transition-transform duration-500 hover:scale-110"
+        className="absolute top-[20%] left-[25%] z-20 group cursor-pointer transition-transform duration-500 hover:scale-110"
         style={{ animation: "float-y 4s ease-in-out infinite" }}
       >
         <div className="flex flex-col items-center gap-2 md:gap-4">
@@ -141,7 +141,7 @@ export default function Hero() {
       {/* Planet 2: Projects */}
       <div
         onClick={() => scrollTo("projects")}
-        className="absolute bottom-[45%] right-[5%] sm:bottom-[25%] sm:right-[20%] z-20 group cursor-pointer transition-transform duration-500 hover:scale-110"
+        className="absolute bottom-[25%] right-[20%] z-20 group cursor-pointer transition-transform duration-500 hover:scale-110"
         style={{ animation: "float-xy 5s ease-in-out infinite" }}
       >
         <div className="flex flex-col items-center gap-2 md:gap-4">
@@ -158,7 +158,7 @@ export default function Hero() {
       {/* Planet 3: About Me */}
       <div
         onClick={() => scrollTo("about")}
-        className="absolute top-[35%] right-[8%] sm:right-[30%] z-20 group cursor-pointer transition-transform duration-500 hover:scale-110"
+        className="absolute top-[35%] right-[30%] z-20 group cursor-pointer transition-transform duration-500 hover:scale-110"
         style={{ animation: "float-y 6s ease-in-out infinite 1s" }}
       >
         <div className="flex flex-col items-center gap-2 md:gap-4">
