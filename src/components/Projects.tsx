@@ -17,7 +17,7 @@ const projects: Project[] = [
   {
     category: "MLB Machine Learning",
     title: "Prospect Predictor",
-    image: "./assets/prospect-predictor.jpg",
+    image: "./assets/baseball.jpg",
     alt: "baseball prospect analytics dashboard",
     url: "https://prospectpredictor.alexshepherd.dev",
     description:
