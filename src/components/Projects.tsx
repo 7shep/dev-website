@@ -15,6 +15,29 @@ type Project = {
 
 const projects: Project[] = [
   {
+    category: "MLB Machine Learning",
+    title: "Prospect Predictor",
+    image: "./assets/prospect-predictor.jpg",
+    alt: "baseball prospect analytics dashboard",
+    url: "https://prospectpredictor.alexshepherd.dev",
+    description:
+      "XGBoost regression model that predicts future MLB WAR for minor league prospects by aggregating Statcast pitch-level data and age-adjusted minor league stats into an interactive comparison dashboard.",
+    problem:
+      "Prospect evaluation relies on subjective scouting grades and siloed statistics that ignore age-adjusted performance curves. This tool replaces gut feel with an objective, data-driven model trained on historical player trajectories.",
+    role: "Built end-to-end solo — data pipeline, feature engineering, model training, FastAPI REST backend, and a React frontend with a custom neon-styled UI for searching and comparing prospects.",
+    stack: [
+      "Python",
+      "XGBoost",
+      "scikit-learn",
+      "pandas",
+      "FastAPI",
+      "React 19",
+      "Tailwind CSS",
+      "Vite",
+      "Render",
+    ],
+  },
+  {
     category: "Discord Analytics Bot",
     title: "Project: Andromeda",
     image: "./assets/andromeda-galaxy-infrared-1024x880.jpg",
