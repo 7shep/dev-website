@@ -2,7 +2,7 @@
     "rewrites": [
       {
         "source": "/prospectpredictor/:path*",
-        "destination": "https://prospect-predictor.vercel.app/:path*"
+        "destination": "prospect-predictor-mlb.vercel.app/:path*"
       }
     ]
   }
