@@ -17,7 +17,7 @@ const projects: Project[] = [
   {
     category: "AI Developer Tools",
     title: "git-assistant",
-    image: "./assets/placeholder.jpg",
+    image: "./assets/npm.png",
     alt: "git assistant application interface",
     github: "https://github.com/7shep/git-assistant",
     description:
