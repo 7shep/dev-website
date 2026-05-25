@@ -48,7 +48,7 @@ const projects: Project[] = [
       "Full-stack analytics platform that tracks Discord server activity in real time and visualizes it through an interactive dashboard.",
     problem:
       "Discord admins have no native way to monitor engagement trends. Andromeda replaces manual scrolling with live metrics on member activity, message volume, and user contributions.",
-    role: "Sole developer. Built everything from scratch including the bot, backend API, and frontend dashboard.",
+    role: "Sole developer.",
     stack: [
       "TypeScript",
       "React",
@@ -75,6 +75,19 @@ const projects: Project[] = [
       "QWeb ran hands-on web dev tutorials but had no persistent home for the material. Members who missed a session had nowhere to catch up.",
     role: "Built the education page in React as part of the club's Next.js site.",
     stack: ["Next.js", "React"],
+  },
+  {
+    category: "AI Developer Tools",
+    title: "git-assistant",
+    image: "./assets/placeholder.jpg",
+    alt: "git assistant application interface",
+    github: "https://github.com/7shep/git-assistant",
+    description:
+      "AI agent that answers natural language questions about git repositories with zero cloud dependencies. Works as both a standalone CLI (ran locally) and MCP server integration for AI coding assistants.",
+    problem:
+      "Developers juggle complex git workflows and context switching between terminals and AI tools. git-assistant bridges this gap by making git fully queryable through natural language, running entirely on your machine.",
+    role: "Sole developer. ",
+    stack: ["TypeScript", "Node.js", "Ollama", "MCP SDK", "Ink", "git"],
   },
 ];
 
