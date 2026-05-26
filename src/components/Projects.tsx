@@ -15,6 +15,19 @@ type Project = {
 
 const projects: Project[] = [
   {
+    category: "CLI Agent/VS Code Extension",
+    title: "Screenshot-To-Code (S2C)",
+    image: "./assets/image.png",
+    alt: "constellation AI agent framework architecture diagram",
+    github: "https://github.com/7shep/screenshot-to-code",
+    description:"A VS Code Extension or a CLI tool that turns a screenshot of a GUI into a production-ready React component, using a Gemini/Groq API agent to analyze the image and generate code.",
+    problem: "If I found a GUI I liked online, there was not a reliable way to turn a screenshot of it into code that I could build on.",
+    role: "Sole developer.",
+    stack: ["Gemini + Groq API", "TypeScript", "React", "JavaScript"],
+
+
+  },
+  {
     category: "AI Developer Tools",
     title: "git-assistant",
     image: "./assets/npm.png",
@@ -37,7 +50,7 @@ const projects: Project[] = [
       "XGBoost regression model that predicts future MLB WAR for minor league prospects by aggregating Statcast pitch-level data and age-adjusted minor league stats into an interactive comparison dashboard.",
     problem:
       "Prospect evaluation relies on subjective scouting grades and siloed statistics that ignore age-adjusted performance curves. This tool replaces gut feel with an objective, data-driven model trained on historical player trajectories.",
-    role: "Built end-to-end solo including data pipeline, feature engineering, model training, FastAPI REST backend, and a React frontend for searching and comparing prospects.",
+    role: "Sole developer.",
     stack: [
       "Python",
       "XGBoost",
