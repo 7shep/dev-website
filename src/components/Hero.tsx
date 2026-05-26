@@ -66,7 +66,7 @@ export default function Hero() {
           >
             I'M A
             <Typewriter
-              text={["Full-Stack Developer", "Student", "Problem Solver", "Tech Enthusiast", "Music Enthusiast", ""]}
+              text={["Full-Stack Developer", "Student", "Problem Solver", "Tech Enthusiast", "Music Enthusiast",]}
               speed={60}
               deleteSpeed={35}
               waitTime={2000}
