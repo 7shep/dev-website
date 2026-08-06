@@ -25,7 +25,7 @@ const projects: Project[] = [
       "Open-source AI art director for React interfaces built with coding agents. Universal turns project discovery into an approved creative brief, a concrete art direction, and a versioned design plan before reviewing the finished implementation.",
     problem:
       "Coding agents can produce functional interfaces while repeatedly falling back to generic layouts, arbitrary gradients, and weak visual hierarchy. Universal adds design direction and critique to the workflow so creative intent survives implementation.",
-    role: "Sole developer.",
+    role: "Main developer, this project is open-source and actively maintained.",
     stack: ["TypeScript", "React 19", "Node.js", "MCP SDK", "Vite", "pnpm"],
   },
   {
