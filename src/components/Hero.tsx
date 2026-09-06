@@ -1,183 +1,79 @@
-import { Typewriter } from "./ui/typewriter"
-
-function scrollTo(id: string) {
-  const target = document.getElementById(id);
-  if (!target) return;
-  const start = window.scrollY;
-  const end = target.getBoundingClientRect().top + start;
-  const duration = 1000;
-  const startTime = performance.now();
-
-  function ease(t: number) {
-    return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-  }
-
-  function step(now: number) {
-    const elapsed = now - startTime;
-    const progress = Math.min(elapsed / duration, 1);
-    window.scrollTo(0, start + (end - start) * ease(progress));
-    if (progress < 1) requestAnimationFrame(step);
-  }
-
-  requestAnimationFrame(step);
-}
-
+import { lazy, Suspense, useState } from "react";
+import {
+  TbArrowDownRight,
+  TbPlayerPause,
+  TbPlayerPlay,
+  TbBallBaseball,
+  TbBarbell,
+  TbVinyl,
+  TbBallAmericanFootball,
+} from "react-icons/tb";
+const PersonalObjects = lazy(() => import("./PersonalObjects"));
+const interests = [
+  { label: "Baseball", icon: TbBallBaseball },
+  { label: "The gym", icon: TbBarbell },
+  { label: "Music", icon: TbVinyl },
+  { label: "Football", icon: TbBallAmericanFootball },
+];
 export default function Hero() {
+  const [selected, setSelected] = useState(0);
+  const [paused, setPaused] = useState(false);
   return (
-    <section className="relative h-screen flex items-center justify-center">
-      {/* Background */}
-      {/* Background layer removed for seamless page transition */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(800px,100vw)] h-[min(800px,100vw)] bg-primary/5 rounded-full blur-[120px]" />
-
-      {/* Orbit Rings */}
-      <div className="orbit-path w-[min(350px,44vw)] h-[min(350px,44vw)] opacity-40" style={{ animation: "orbit-rotate 60s linear infinite" }} />
-      <div className="orbit-path w-[min(550px,69vw)] h-[min(550px,69vw)] opacity-25" style={{ animation: "orbit-rotate 90s linear infinite reverse" }} />
-      <div className="orbit-path w-[min(800px,100vw)] h-[min(800px,100vw)] opacity-10" style={{ animation: "orbit-rotate 120s linear infinite" }} />
-
-      {/* Central Sun */}
-      <div className="relative z-10 flex flex-col items-center">
-        {/* Spinning gradient border ring */}
-        <div
-          className="w-32 h-32 rounded-full p-[2px] sun-ring group cursor-pointer"
-          style={{ animation: "sun-spin 4s linear infinite, sun-pulse 3s ease-in-out infinite, hero-fade-in 0.8s ease-out both" }}
-        >
-          {/* Counter-rotate so the inner image stays still */}
-          <div
-            className="w-full h-full rounded-full bg-surface-container-lowest flex items-center justify-center overflow-hidden"
-            style={{ animation: "sun-spin 4s linear infinite reverse" }}
-          >
-            <img
-              className="w-full h-full object-cover opacity-60 grayscale group-hover:grayscale-0 transition-all duration-700"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAuGqVTFcefjqJfP49o_5YsvrceLWqUQqas8RJK1yjGTXG97grsUGImFGGfm6hxDQU-Zrk_9In5uj-3PVgMoGx1LlZvVxWCDonGoFXU_qULeQSWmHzICh_38bZbATnxevcehX5ZKKwJDhr9I6dKiB5TY5NfHgtvFL1lUvZpyIxKj-uXRFZYD9fiGX_Hv0KXrCyj5D-1mQMC6-pgzfJm3BWGWH5QeFxGli0MJCitoHmChJh0IbShVpKuy9p_P_S2gX9J1sO9I1hElp90"
-              alt="cosmic nebula"
-            />
-          </div>
+    <section id="home" className="hero wrap">
+      <p className="hero-intro">Developer. Student. Always building.</p>
+      <div className="hero-composition">
+        <h1 aria-label="Alex Shepherd">
+          <span className="name-first">Alex</span>
+          <span className="name-last">
+            Shepherd<span className="name-period">.</span>
+          </span>
+        </h1>
+        <div className="hero-objects">
+          <Suspense fallback={<div className="object-fallback" aria-hidden />}>
+            <PersonalObjects selected={selected} paused={paused} />
+          </Suspense>
         </div>
-        <div className="mt-8 text-center">
-          <h1
-            className="text-4xl sm:text-5xl md:text-8xl font-headline font-bold tracking-[-0.05em] text-on-surface"
-            style={{ animation: "hero-fade-in 0.8s ease-out 0.3s both" }}
-          >
-            ALEX SHEPHERD
-          </h1>
-          <div
-            className="font-label text-xs tracking-[0.5em] text-secondary mt-4 uppercase px-4"
-            style={{ animation: "hero-fade-in 0.8s ease-out 0.5s both" }}
-          >
-            I'M A
-            <Typewriter
-              text={["Full-Stack Developer", "Student", "Problem Solver", "Tech Enthusiast", "Music Enthusiast",]}
-              speed={60}
-              deleteSpeed={35}
-              waitTime={2000}
-              cursorChar="_"
-              cursorClassName="text-secondary ml-0.5"
-              className="text-secondary"
-            />
-          </div>
-          <p
-            className="font-label text-xs tracking-[0.5em] text-secondary mt-4 uppercase px-4"
-            style={{ animation: "hero-fade-in 0.8s ease-out 0.6s both" }}
-          >
-            Based in Elora, Ontario.
-          </p>
-          <div
-            className="flex items-center justify-center gap-3 mt-6 font-label text-[11px] tracking-widest uppercase text-on-surface-variant"
-            style={{ animation: "hero-fade-in 0.8s ease-out 0.7s both" }}
-          >
-            <a
-              href="https://github.com/7shep"
-              target="_blank"
-              rel="noreferrer"
-              className="hover:text-primary transition-colors duration-200"
-            >
-              GitHub
-            </a>
-            <span className="text-outline-variant">||</span>
-            <a
-              href="https://linkedin.com/in/7shep"
-              target="_blank"
-              rel="noreferrer"
-              className="hover:text-primary transition-colors duration-200"
-            >
-              LinkedIn
-            </a>
-            <span className="text-outline-variant">||</span>
-            <button
-              onClick={() => scrollTo("contact")}
-              className="uppercase hover:text-primary transition-colors duration-200 cursor-pointer"
-            >
-              Contact Me
-            </button>
-            <span className="text-outline-variant">||</span>
-            <a
-              href="/assets/Alex_Shepherd_Resume.pdf"
-              download
-              className="hover:text-primary transition-colors duration-200"
-            >
-              Resume
-            </a>
-          </div>
-        </div>
-      </div>
-
-      {/* Planet 1: Skills */}
-      <div
-        onClick={() => scrollTo("skills")}
-        className="absolute top-[20%] left-[25%] z-20 group cursor-pointer transition-transform duration-500 hover:scale-110"
-        style={{ animation: "float-y 4s ease-in-out infinite" }}
-      >
-        <div className="flex flex-col items-center gap-2 md:gap-4">
-          <div className="w-10 h-10 md:w-16 md:h-16 rounded-full bg-surface-variant backdrop-blur-xl border border-secondary/20 flex items-center justify-center shadow-[0_0_30px_rgba(0,251,251,0.2)]">
-            <span className="material-symbols-outlined text-secondary text-base md:text-2xl">terminal</span>
-          </div>
-          <div className="text-center">
-            <span className="font-headline text-[8px] md:text-[10px] tracking-widest text-secondary block">STATION 01</span>
-            <h3 className="font-headline text-xs md:text-lg font-bold text-on-surface">Skills</h3>
-          </div>
-        </div>
-      </div>
-
-      {/* Planet 2: Projects */}
-      <div
-        onClick={() => scrollTo("projects")}
-        className="absolute bottom-[25%] right-[20%] z-20 group cursor-pointer transition-transform duration-500 hover:scale-110"
-        style={{ animation: "float-xy 5s ease-in-out infinite" }}
-      >
-        <div className="flex flex-col items-center gap-2 md:gap-4">
-          <div className="w-12 h-12 md:w-20 md:h-20 rounded-full bg-surface-variant backdrop-blur-xl border border-primary/20 flex items-center justify-center shadow-[0_0_30px_rgba(204,151,255,0.2)]">
-            <span className="material-symbols-outlined text-primary text-lg md:text-3xl">deployed_code</span>
-          </div>
-          <div className="text-center">
-            <span className="font-headline text-[8px] md:text-[10px] tracking-widest text-primary block">STATION 02</span>
-            <h3 className="font-headline text-xs md:text-lg font-bold text-on-surface">Projects</h3>
-          </div>
-        </div>
-      </div>
-
-      {/* Planet 3: About Me */}
-      <div
-        onClick={() => scrollTo("about")}
-        className="absolute top-[35%] right-[30%] z-20 group cursor-pointer transition-transform duration-500 hover:scale-110"
-        style={{ animation: "float-y 6s ease-in-out infinite 1s" }}
-      >
-        <div className="flex flex-col items-center gap-2 md:gap-4">
-          <div className="w-9 h-9 md:w-14 md:h-14 rounded-full bg-surface-variant backdrop-blur-xl border border-tertiary/20 flex items-center justify-center shadow-[0_0_30px_rgba(255,81,250,0.2)]">
-            <span className="material-symbols-outlined text-tertiary text-sm md:text-xl">fingerprint</span>
-          </div>
-          <div className="text-center">
-            <span className="font-headline text-[8px] md:text-[10px] tracking-widest text-tertiary block">STATION 03</span>
-            <h3 className="font-headline text-xs md:text-lg font-bold text-on-surface">About Me</h3>
-          </div>
-        </div>
-      </div>
-
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-12 flex flex-col items-center gap-3" style={{ animation: "scroll-fade 2s ease-in-out infinite" }}>
-        <span className="font-label text-[9px] tracking-[0.3em] text-on-surface-variant uppercase">
-          Scroll to Explore
+        <span className="hero-aside">
+          A little of what
+          <br />
+          makes me, me.
         </span>
-        <div className="w-[1px] h-16 bg-gradient-to-b from-primary to-transparent" />
+      </div>
+      <div className="hero-bottom">
+        <div className="hero-copy">
+          <p>
+            Turning curiosity into code.
+            <br />
+            Building tools I wish already existed.
+          </p>
+          <a className="text-link" href="#projects">
+            Explore my work <TbArrowDownRight aria-hidden />
+          </a>
+        </div>
+        <div className="object-controls">
+          <p>Outside the editor</p>
+          <div className="interest-controls" aria-label="Choose a 3D object">
+            {interests.map(({ label, icon: Icon }, index) => (
+              <button
+                key={label}
+                aria-label={label}
+                aria-pressed={selected === index}
+                onClick={() => setSelected(index)}
+              >
+                <Icon aria-hidden />
+                <span>{label}</span>
+              </button>
+            ))}
+            <button
+              className="pause-control"
+              onClick={() => setPaused(!paused)}
+              aria-label={paused ? "Resume 3D motion" : "Pause 3D motion"}
+              aria-pressed={paused}
+            >
+              {paused ? <TbPlayerPlay /> : <TbPlayerPause />}
+            </button>
+          </div>
+        </div>
       </div>
     </section>
   );
