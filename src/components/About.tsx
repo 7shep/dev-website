@@ -28,7 +28,7 @@ export default function About() {
             href="/assets/Alex_Shepherd_Resume.pdf"
             download
           >
-            Download résumé <TbArrowDownRight aria-hidden />
+            Download Resume <TbArrowDownRight aria-hidden />
           </a>
         </div>
         <div className="about-body">
