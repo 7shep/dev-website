@@ -70,6 +70,96 @@ button {
   --button: #222222;
   --button-text: #eeeeea;
 }
+/* A brief typographic introduction, using the hero's display face. */
+.entrance-overlay {
+  --intro-progress: 0;
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  background: var(--surface);
+  pointer-events: none;
+  transition: opacity 700ms cubic-bezier(0.65, 0, 0.35, 1);
+}
+.entrance-overlay[data-phase="fade"] {
+  opacity: 0;
+}
+.entrance-content {
+  position: relative;
+  text-align: center;
+  transition: transform 700ms cubic-bezier(0.65, 0, 0.35, 1);
+}
+.entrance-overlay[data-phase="fade"] .entrance-content {
+  transform: scale(1.12) translateY(-12px);
+}
+.entrance-year {
+  display: flex;
+  justify-content: center;
+  font-size: clamp(100px, 22vw, 320px);
+  font-weight: 550;
+  line-height: 1;
+  letter-spacing: -0.078em;
+  font-variant-numeric: tabular-nums;
+  min-width: 4ch;
+}
+.entrance-year > span {
+  display: block;
+  width: calc(2ch - 0.156em);
+  flex: none;
+}
+.entrance-welcome-mask {
+  position: absolute;
+  top: calc(100% + 28px);
+  left: 50%;
+  transform: translateX(-50%);
+  overflow: hidden;
+  width: max-content;
+  max-width: 90vw;
+}
+.entrance-welcome {
+  display: flex;
+  gap: 0.25em;
+  margin: 0;
+  font-size: clamp(16px, 2vw, 26px);
+  font-weight: 550;
+  letter-spacing: -0.04em;
+}
+.entrance-welcome span {
+  display: inline-block;
+  transform: translateY(115%) rotate(3deg);
+  opacity: 0;
+  transition: transform 550ms cubic-bezier(0.16, 1, 0.3, 1), opacity 400ms ease-out;
+}
+.entrance-welcome span:nth-child(2) {
+  transition-delay: 70ms;
+}
+.entrance-welcome span:nth-child(3) {
+  transition-delay: 140ms;
+}
+.entrance-overlay[data-phase="welcome"] .entrance-welcome span,
+.entrance-overlay[data-phase="fade"] .entrance-welcome span {
+  transform: translateY(0) rotate(0);
+  opacity: 1;
+}
+.entrance-rule {
+  position: absolute;
+  bottom: -100px;
+  left: 35%;
+  width: 30%;
+  height: 1px;
+  background: var(--muted);
+  transform: scaleX(var(--intro-progress));
+  transform-origin: left;
+  transition: opacity 350ms ease-out;
+}
+.entrance-overlay[data-phase="welcome"] .entrance-rule,
+.entrance-overlay[data-phase="fade"] .entrance-rule {
+  opacity: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .entrance-overlay { display: none; }
+}
 .wrap {
   width: min(100% - 112px, 1400px);
   margin-inline: auto;

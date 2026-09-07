@@ -6,6 +6,7 @@ import TechnicalStack from "./components/TechnicalStack";
 import Projects from "./components/Projects";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import Entrance from "./components/Entrance";
 
 export default function App() {
   const [theme, setTheme] = useState<"dark" | "light">(() =>
@@ -15,6 +16,7 @@ export default function App() {
   );
   return (
     <div className="portfolio" data-theme={theme}>
+      <Entrance />
       <a className="skip-link" href="#main">
         Skip to content
       </a>
