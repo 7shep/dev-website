@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { TbArrowUpRight, TbCheck } from "react-icons/tb";
+import { useReveal } from "../hooks/useReveal";
 export default function Contact() {
+  const { ref, isVisible } = useReveal();
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState<
     "idle" | "loading" | "success" | "error"
@@ -35,7 +37,7 @@ export default function Contact() {
     if (status !== "loading") setStatus("idle");
   }
   return (
-    <section id="contact" className="contact-section wrap section-space">
+    <section ref={ref} id="contact" className={`contact-section wrap section-space reveal${isVisible ? " visible" : ""}`}>
       <div className="contact-heading">
         <span className="eyebrow">Have something in mind?</span>
         <h2>

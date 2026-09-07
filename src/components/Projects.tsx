@@ -1,4 +1,5 @@
 import { TbArrowUpRight } from "react-icons/tb";
+import { useReveal } from "../hooks/useReveal";
 
 type Project = {
   category: string;
@@ -125,8 +126,9 @@ function ProjectCard({
   project: Project;
   image?: boolean;
 }) {
+  const { ref, isVisible } = useReveal();
   return (
-    <article className="project-card">
+    <article ref={ref} className={`project-card reveal${isVisible ? " visible" : ""}`}>
       {image && (
         <a
           className="project-image"
@@ -187,9 +189,10 @@ function ProjectCard({
   );
 }
 export default function Projects() {
+  const { ref, isVisible } = useReveal();
   return (
     <section id="projects" className="projects-section wrap">
-      <div className="section-heading">
+      <div ref={ref} className={`section-heading reveal${isVisible ? " visible" : ""}`}>
         <h2>Selected work</h2>
         <span>A few things I’ve built</span>
       </div>

@@ -163,18 +163,12 @@ function makeObjects() {
 }
 
 export default function PersonalObjects({
-  selected,
   paused,
 }: {
-  selected: number;
   paused: boolean;
 }) {
   const host = useRef<HTMLDivElement>(null);
-  const selection = useRef(selected);
   const pause = useRef(paused);
-  useEffect(() => {
-    selection.current = selected;
-  }, [selected]);
   useEffect(() => {
     pause.current = paused;
   }, [paused]);
@@ -251,20 +245,27 @@ export default function PersonalObjects({
       previous = now;
       if (!active || document.hidden || contextLost) return;
       const still = pause.current || reduced.matches;
+      if (!still) time += dt;
+      const selected = Math.floor(time / 6) % objects.length;
       if (
         still &&
         lastStill &&
-        lastSelection === selection.current &&
+        lastSelection === selected &&
         lastWidth === element!.clientWidth
       )
         return;
-      if (!still) time += dt;
+      // Fade through transparent at each change, preserving a single visible model.
+      const phase = time % 6;
+      renderer.domElement.style.opacity = reduced.matches
+        ? "1"
+        : String(Math.min(1, phase / 0.45, (6 - phase) / 0.45));
       objects.forEach((object, index) => {
-        object.visible = index === selection.current;
-        if (object.visible)
-          object.position.y = still ? 0 : Math.sin(time * 0.65) * 0.085;
+        object.visible = index === selected;
+        if (object.visible && !pause.current)
+          object.position.y = reduced.matches ? 0 : Math.sin(time * 0.65) * 0.085;
       });
-      group.rotation.y = still
+      if (!pause.current) {
+      group.rotation.y = reduced.matches
         ? 0
         : THREE.MathUtils.damp(
             group.rotation.y,
@@ -272,11 +273,13 @@ export default function PersonalObjects({
             4,
             dt,
           );
-      group.rotation.x = still
+      group.rotation.x = reduced.matches
         ? 0
         : THREE.MathUtils.damp(group.rotation.x, pointer.y * 0.18, 4, dt);
+      }
       renderer.render(scene, camera);
-      lastSelection = selection.current;
+      element!.dataset.object = ["baseball", "dumbbell", "vinyl", "football"][selected];
+      lastSelection = selected;
       lastStill = still;
       lastWidth = element!.clientWidth;
     }

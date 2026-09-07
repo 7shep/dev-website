@@ -1,11 +1,13 @@
-import {
-  TbArrowDownRight,
-  TbBallBaseball,
-  TbBarbell,
-  TbHeadphones,
-  TbBallAmericanFootball,
-} from "react-icons/tb";
+import { TbArrowDownRight } from "react-icons/tb";
 import { useReveal } from "../hooks/useReveal";
+
+const interests = [
+  ["01", "Baseball", "Go Jays."],
+  ["02", "The gym", "One more rep."],
+  ["03", "Music", "Always in rotation."],
+  ["04", "Football", "Go Steelers."],
+];
+
 export default function About() {
   const { ref, isVisible } = useReveal();
   return (
@@ -17,9 +19,9 @@ export default function About() {
         <div className="about-heading">
           <span className="eyebrow">The person behind the projects</span>
           <h2>
-            Curiosity
+            I follow
             <br />
-            doesn’t clock out.
+            the question<span className="about-mark">.</span>
           </h2>
           <a
             className="text-link"
@@ -40,30 +42,19 @@ export default function About() {
             getting a workout in, or finding a reason to talk baseball. My best
             projects start with something I’m already curious about.
           </p>
-          <div className="personal-interests">
-            <div>
-              <TbBallBaseball aria-hidden />
-              <span>
-                Baseball<small>Go Jays.</small>
-              </span>
-            </div>
-            <div>
-              <TbBarbell aria-hidden />
-              <span>
-                The gym<small>One more rep.</small>
-              </span>
-            </div>
-            <div>
-              <TbHeadphones aria-hidden />
-              <span>
-                Music<small>Always in rotation.</small>
-              </span>
-            </div>
-            <div>
-              <TbBallAmericanFootball aria-hidden />
-              <span>
-                Football<small>Go Steelers.</small>
-              </span>
+          <div
+            className="personal-interests"
+            aria-label="A few of Alex's interests"
+          >
+            <p className="interests-label">Outside the browser</p>
+            <div className="interest-list">
+              {interests.map(([number, title, note]) => (
+                <div className="interest-row" key={title}>
+                  <span className="interest-number">{number}</span>
+                  <span className="interest-title">{title}</span>
+                  <small>{note}</small>
+                </div>
+              ))}
             </div>
           </div>
         </div>

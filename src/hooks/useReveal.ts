@@ -18,7 +18,7 @@ export function useReveal(options?: { threshold?: number; rootMargin?: string })
           observer.disconnect();
         }
       },
-      { threshold: options?.threshold ?? 0.15, rootMargin: options?.rootMargin ?? "0px" }
+      { threshold: options?.threshold ?? 0, rootMargin: options?.rootMargin ?? "0px 0px -32px 0px" }
     );
     observer.observe(el);
     return () => observer.disconnect();

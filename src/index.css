@@ -463,10 +463,16 @@ h2 {
   gap: 80px;
 }
 .about-heading h2 {
-  font-size: clamp(37px, 4.6vw, 66px);
+  font-size: clamp(42px, 5.2vw, 76px);
+  max-width: 8ch;
+  line-height: 0.98;
+  text-wrap: balance;
+}
+.about-mark {
+  color: var(--quiet);
 }
 .about-heading .text-link {
-  margin-top: 34px;
+  margin-top: 42px;
 }
 .about-body > p {
   font-size: 14px;
@@ -482,24 +488,47 @@ h2 {
   margin-top: 0;
 }
 .personal-interests {
+  margin-top: 47px;
+  border-top: 1px solid var(--line);
+  padding-top: 13px;
+}
+.interests-label {
+  font-family: "IBM Plex Mono", monospace;
+  color: var(--quiet) !important;
+  font-size: 10px !important;
+  letter-spacing: 0.03em;
+  margin: 0 0 17px !important;
+  text-transform: uppercase;
+}
+.interest-list {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 27px 20px;
-  margin-top: 35px;
+  column-gap: 20px;
 }
-.personal-interests > div {
-  display: flex;
-  align-items: start;
-  gap: 14px;
+.interest-row {
+  display: grid;
+  grid-template-columns: 26px 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 11px;
+  padding: 13px 0 15px;
+  border-bottom: 1px solid var(--line);
+  transition: color 0.2s, padding-left 0.2s;
 }
-.personal-interests svg {
-  color: var(--muted);
-  font-size: 22px;
+.interest-row:hover {
+  color: var(--text);
+  padding-left: 5px;
 }
-.personal-interests span {
+.interest-number {
+  grid-row: 1 / span 2;
+  color: var(--quiet);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  padding-top: 3px;
+}
+.interest-title {
   font-size: 13px;
 }
-.personal-interests small {
+.interest-row small {
   display: block;
   color: var(--muted);
   font-size: 11px;
@@ -816,13 +845,24 @@ h2 {
     gap: 40px;
   }
   .about-heading h2 {
-    font-size: 43px;
+    font-size: 50px;
+    max-width: 9ch;
   }
   .about-heading .text-link {
-    margin-top: 20px;
+    margin-top: 28px;
   }
   .about-body > .large-copy {
     font-size: 22px;
+  }
+  .personal-interests {
+    margin-top: 35px;
+  }
+  .interest-list {
+    column-gap: 13px;
+  }
+  .interest-row {
+    grid-template-columns: 22px 1fr;
+    column-gap: 7px;
   }
   .stack-section {
     padding-top: 0;

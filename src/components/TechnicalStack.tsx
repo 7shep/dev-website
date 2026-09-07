@@ -1,3 +1,5 @@
+import { useReveal } from "../hooks/useReveal";
+
 const groups = [
   {
     title: "Interfaces",
@@ -13,8 +15,9 @@ const groups = [
   },
 ];
 export default function TechnicalStack() {
+  const { ref, isVisible } = useReveal();
   return (
-    <section id="skills" className="stack-section wrap">
+    <section ref={ref} id="skills" className={`stack-section wrap reveal${isVisible ? " visible" : ""}`}>
       <h2>The tools I build with.</h2>
       <div className="stack-groups">
         {groups.map((group) => (
