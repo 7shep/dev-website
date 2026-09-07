@@ -1,30 +1,50 @@
+import { useState } from "react";
+import { TbArrowUpRight, TbMoon, TbSun } from "react-icons/tb";
 import Hero from "./components/Hero";
 import About from "./components/About";
 import TechnicalStack from "./components/TechnicalStack";
 import Projects from "./components/Projects";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
-import ParticleBackground from "./components/ParticleBackground";
 
 export default function App() {
+  const [theme, setTheme] = useState<"dark" | "light">(() =>
+    window.matchMedia("(prefers-color-scheme: light)").matches
+      ? "light"
+      : "dark",
+  );
   return (
-    <main className="relative min-h-screen star-field overflow-hidden bg-background text-on-surface font-body selection:bg-primary/30">
-      {/* Ambient twinkle dots */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
-        <span className="absolute w-1 h-1 rounded-full bg-white/10 top-[15%] left-[8%]"  style={{ animation: "twinkle 3s ease-in-out infinite" }} />
-        <span className="absolute w-1 h-1 rounded-full bg-white/10 top-[42%] right-[12%]" style={{ animation: "twinkle 4s ease-in-out infinite 1.2s" }} />
-        <span className="absolute w-1 h-1 rounded-full bg-white/10 top-[68%] left-[18%]" style={{ animation: "twinkle 5s ease-in-out infinite 0.7s" }} />
-        <span className="absolute w-1 h-1 rounded-full bg-white/10 top-[85%] right-[30%]" style={{ animation: "twinkle 3.5s ease-in-out infinite 2s" }} />
-      </div>
-      <Hero />
-      <div className="relative">
-        <ParticleBackground />
+    <div className="portfolio" data-theme={theme}>
+      <a className="skip-link" href="#main">
+        Skip to content
+      </a>
+      <header className="site-header wrap">
+        <a className="wordmark" href="#home" aria-label="Alex Shepherd home">
+          as<span> /</span>
+        </a>
+        <nav aria-label="Main navigation">
+          <a href="#projects">Work</a>
+          <a href="#about">About</a>
+          <a href="#contact">
+            Contact <TbArrowUpRight aria-hidden />
+          </a>
+        </nav>
+        <button
+          className="theme-toggle"
+          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+          aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
+        >
+          {theme === "dark" ? <TbSun /> : <TbMoon />}
+        </button>
+      </header>
+      <main id="main">
+        <Hero />
+        <Projects />
         <About />
         <TechnicalStack />
-        <Projects />
         <Contact />
-      </div>
+      </main>
       <Footer />
-    </main>
+    </div>
   );
 }

@@ -1,3 +1,4 @@
+import { TbArrowUpRight } from "react-icons/tb";
 import { useReveal } from "../hooks/useReveal";
 
 type Project = {
@@ -34,12 +35,12 @@ const projects: Project[] = [
     image: "./assets/image.png",
     alt: "constellation AI agent framework architecture diagram",
     github: "https://github.com/7shep/screenshot-to-code",
-    description:"A VS Code Extension or a CLI tool that turns a screenshot of a GUI into a production-ready React component, using a Gemini/Groq API agent to analyze the image and generate code.",
-    problem: "If I found a GUI I liked online, there was not a reliable way to turn a screenshot of it into code that I could build on.",
+    description:
+      "A VS Code Extension or a CLI tool that turns a screenshot of a GUI into a production-ready React component, using a Gemini/Groq API agent to analyze the image and generate code.",
+    problem:
+      "If I found a GUI I liked online, there was not a reliable way to turn a screenshot of it into code that I could build on.",
     role: "Sole developer.",
     stack: ["Gemini + Groq API", "TypeScript", "React", "JavaScript"],
-
-
   },
   {
     category: "AI Developer Tools",
@@ -118,104 +119,98 @@ const projects: Project[] = [
   },
 ];
 
+function ProjectCard({
+  project,
+  image = true,
+}: {
+  project: Project;
+  image?: boolean;
+}) {
+  const { ref, isVisible } = useReveal();
+  return (
+    <article ref={ref} className={`project-card reveal${isVisible ? " visible" : ""}`}>
+      {image && (
+        <a
+          className="project-image"
+          href={project.url || project.github}
+          target="_blank"
+          rel="noreferrer"
+          aria-label={`Explore ${project.title}`}
+        >
+          <img
+            src={project.image}
+            alt={project.alt}
+            loading="lazy"
+            width="900"
+            height="600"
+          />
+        </a>
+      )}
+      <div className="project-meta">
+        <span>{project.category}</span>
+        <div className="project-links">
+          {project.url && (
+            <a
+              href={project.url}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`Live: ${project.title}`}
+            >
+              Live <TbArrowUpRight aria-hidden />
+            </a>
+          )}
+          {project.github && (
+            <a
+              href={project.github}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`View ${project.title} source`}
+            >
+              Source <TbArrowUpRight aria-hidden />
+            </a>
+          )}
+        </div>
+      </div>
+      <h3>{project.title.replace("Project: ", "")}</h3>
+      <p>{project.description}</p>
+      <div className="project-stack">{project.stack.join(" / ")}</div>
+      <details className="project-details">
+        <summary>Behind the build</summary>
+        <p>
+          <strong>The problem. </strong>
+          {project.problem}
+        </p>
+        <p>
+          <strong>My role. </strong>
+          {project.role}
+        </p>
+      </details>
+    </article>
+  );
+}
 export default function Projects() {
   const { ref, isVisible } = useReveal();
-
   return (
-    <section id="projects" className="min-h-screen px-4 sm:px-8 md:px-32 py-32 bg-surface-container-low/30">
-      <div className="text-right mb-24" ref={ref}>
-        <h2 className={`text-3xl sm:text-4xl md:text-7xl font-headline font-bold mt-6 reveal${isVisible ? " visible" : ""}`}>
-          Digital <span className="text-primary">Constellations</span>.
-        </h2>
+    <section id="projects" className="projects-section wrap">
+      <div ref={ref} className={`section-heading reveal${isVisible ? " visible" : ""}`}>
+        <h2>Selected work</h2>
+        <span>A few things I’ve built</span>
       </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-        {projects.map((project, i) => (
-          <article
-            key={project.title}
-            className={`group relative flex flex-col overflow-hidden rounded-2xl bg-surface-container-highest reveal${i > 0 ? " reveal-delay-1" : ""}${isVisible ? " visible" : ""}`}
-          >
-            <div className="relative aspect-video overflow-hidden">
-              <img
-                className="w-full h-full object-cover opacity-40 group-hover:scale-105 group-hover:opacity-60 transition-all duration-700"
-                src={project.image}
-                alt={project.alt}
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-surface-container-highest via-surface-container-highest/60 to-transparent" />
-              <div className="absolute inset-x-0 bottom-0 p-4 sm:p-6 md:p-8">
-                <span className="text-[10px] font-label text-primary tracking-widest uppercase">
-                  {project.category}
-                </span>
-                <h4 className="text-2xl font-headline font-bold text-on-surface mt-2">
-                  {project.title}
-                </h4>
-              </div>
-            </div>
-
-            <div className="flex flex-col gap-5 p-4 sm:p-6 md:p-8">
-              <p className="text-sm text-on-surface-variant leading-relaxed">
-                {project.description}
-              </p>
-
-              <div className="border-l-2 border-primary/30 pl-4 space-y-3">
-                <div>
-                  <span className="block text-[9px] font-label text-primary tracking-[0.25em] uppercase mb-1">
-                    Problem
-                  </span>
-                  <p className="text-xs text-on-surface-variant leading-relaxed">
-                    {project.problem}
-                  </p>
-                </div>
-                <div>
-                  <span className="block text-[9px] font-label text-primary tracking-[0.25em] uppercase mb-1">
-                    Role
-                  </span>
-                  <p className="text-xs text-on-surface-variant leading-relaxed">
-                    {project.role}
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex flex-wrap gap-2 pt-1">
-                {project.stack.map((tech) => (
-                  <span
-                    key={tech}
-                    className="px-2.5 py-1 rounded-md text-[10px] font-label uppercase tracking-wider text-on-surface-variant bg-surface-container-high/60 border border-white/5"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-
-              <div className="flex gap-4 pt-2 border-t border-white/5 mt-1">
-                {project.url && (
-                  <a
-                    href={project.url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex items-center gap-2 text-xs font-label uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors"
-                  >
-                    <span className="material-symbols-outlined text-base">link</span>
-                    Live
-                  </a>
-                )}
-                {project.github && (
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex items-center gap-2 text-xs font-label uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors"
-                  >
-                    <span className="material-symbols-outlined text-base">code</span>
-                    Source
-                  </a>
-                )}
-              </div>
-            </div>
-          </article>
+      <div className="project-grid">
+        {[projects[0], projects[3], projects[1], projects[2]].map((project) => (
+          <ProjectCard key={project.title} project={project} />
         ))}
       </div>
+      <details className="more-projects">
+        <summary>
+          More from the archive <span>2 projects +</span>
+        </summary>
+        <div className="project-grid">
+          {projects.slice(4).map((project) => (
+            <ProjectCard key={project.title} project={project} image={false} />
+          ))}
+        </div>
+      </details>
     </section>
   );
 }
