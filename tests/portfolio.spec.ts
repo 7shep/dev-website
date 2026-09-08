@@ -33,10 +33,11 @@ test("desktop portfolio, objects, theme and project archive", async ({
     "light",
   );
   await page.screenshot({ path: "test-results/desktop-light.png" });
-  await page.getByText("More from the archive", { exact: false }).click();
+  await page.getByRole("button", { name: "Read about Project: Andromeda", exact: true }).click();
   await expect(
     page.getByRole("heading", { name: "Andromeda", exact: true }),
   ).toBeVisible();
+  await page.keyboard.press("Escape");
   const resume = await page.request.get("/assets/Alex_Shepherd_Resume.pdf");
   expect(resume.ok()).toBeTruthy();
   expect(errors).toEqual([]);

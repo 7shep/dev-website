@@ -37,7 +37,7 @@ export default function Contact() {
     if (status !== "loading") setStatus("idle");
   }
   return (
-    <section ref={ref} id="contact" className={`contact-section wrap section-space reveal${isVisible ? " visible" : ""}`}>
+    <section ref={ref} id="contact" className={`contact-section wrap section-space reveal-group${isVisible ? " visible" : ""}`}>
       <div className="contact-heading">
         <span className="eyebrow">Have something in mind?</span>
         <h2>

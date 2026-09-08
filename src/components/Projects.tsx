@@ -1,7 +1,6 @@
-import { TbArrowUpRight } from "react-icons/tb";
-import { useReveal } from "../hooks/useReveal";
+import ProjectCollage from "./ProjectCollage";
 
-type Project = {
+export type Project = {
   category: string;
   title: string;
   image: string;
@@ -119,98 +118,6 @@ const projects: Project[] = [
   },
 ];
 
-function ProjectCard({
-  project,
-  image = true,
-}: {
-  project: Project;
-  image?: boolean;
-}) {
-  const { ref, isVisible } = useReveal();
-  return (
-    <article ref={ref} className={`project-card reveal${isVisible ? " visible" : ""}`}>
-      {image && (
-        <a
-          className="project-image"
-          href={project.url || project.github}
-          target="_blank"
-          rel="noreferrer"
-          aria-label={`Explore ${project.title}`}
-        >
-          <img
-            src={project.image}
-            alt={project.alt}
-            loading="lazy"
-            width="900"
-            height="600"
-          />
-        </a>
-      )}
-      <div className="project-meta">
-        <span>{project.category}</span>
-        <div className="project-links">
-          {project.url && (
-            <a
-              href={project.url}
-              target="_blank"
-              rel="noreferrer"
-              aria-label={`Live: ${project.title}`}
-            >
-              Live <TbArrowUpRight aria-hidden />
-            </a>
-          )}
-          {project.github && (
-            <a
-              href={project.github}
-              target="_blank"
-              rel="noreferrer"
-              aria-label={`View ${project.title} source`}
-            >
-              Source <TbArrowUpRight aria-hidden />
-            </a>
-          )}
-        </div>
-      </div>
-      <h3>{project.title.replace("Project: ", "")}</h3>
-      <p>{project.description}</p>
-      <div className="project-stack">{project.stack.join(" / ")}</div>
-      <details className="project-details">
-        <summary>Behind the build</summary>
-        <p>
-          <strong>The problem. </strong>
-          {project.problem}
-        </p>
-        <p>
-          <strong>My role. </strong>
-          {project.role}
-        </p>
-      </details>
-    </article>
-  );
-}
 export default function Projects() {
-  const { ref, isVisible } = useReveal();
-  return (
-    <section id="projects" className="projects-section wrap">
-      <div ref={ref} className={`section-heading reveal${isVisible ? " visible" : ""}`}>
-        <h2>Selected work</h2>
-        <span>A few things I’ve built</span>
-      </div>
-      <div className="project-grid">
-        {[projects[0], projects[3], projects[1], projects[2]].map((project) => (
-          <ProjectCard key={project.title} project={project} />
-        ))}
-      </div>
-      <details className="more-projects">
-        <summary>
-          More from the archive <span>2 projects +</span>
-        </summary>
-        <div className="project-grid">
-          {projects.slice(4).map((project) => (
-            <ProjectCard key={project.title} project={project} image={false} />
-          ))}
-        </div>
-      </details>
-    </section>
-  );
+  return <ProjectCollage projects={[projects[0], projects[3], projects[1], projects[2], projects[4], projects[5]]} />;
 }

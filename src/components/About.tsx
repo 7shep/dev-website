@@ -14,7 +14,7 @@ export default function About() {
     <section id="about" className="about-section wrap section-space">
       <div
         ref={ref}
-        className={`about-grid reveal${isVisible ? " visible" : ""}`}
+        className={`about-grid reveal-group${isVisible ? " visible" : ""}`}
       >
         <div className="about-heading">
           <span className="eyebrow">The person behind the projects</span>

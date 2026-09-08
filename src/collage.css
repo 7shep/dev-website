@@ -1,0 +1,111 @@
+.project-collage {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  align-items: start;
+  gap: 32px 0;
+  padding: 30px 20px 65px;
+}
+.collage-item { position: relative; grid-column: span 5; --tilt: -4deg; --reveal-x: -80px; --reveal-y: 20px; --reveal-turn: -7deg; }
+.collage-item-1 { grid-column: 1 / 7; }
+.collage-item-2 { grid-column: 8 / 13; margin-top: 90px; --tilt: 5deg; --reveal-x: 80px; --reveal-turn: 8deg; }
+.collage-item-3 { grid-column: 2 / 7; margin-top: -30px; --tilt: 3deg; --reveal-x: 0px; --reveal-y: -65px; }
+.collage-item-4 { grid-column: 8 / 13; margin-top: 65px; --tilt: -5deg; --reveal-x: 70px; }
+.collage-item-5 { grid-column: 1 / 6; --tilt: -3deg; --reveal-y: -65px; }
+.collage-item-6 { grid-column: 7 / 12; margin-top: 65px; --tilt: 4deg; --reveal-x: 80px; --reveal-turn: 7deg; }
+.collage-item:hover, .collage-item:focus-within { z-index: 2; }
+.project-photo {
+  display: block;
+  position: relative;
+  width: 100%;
+  border: 0;
+  padding: 12px 12px 18px;
+  background: #e8e5dd;
+  color: #292923;
+  text-align: left;
+  transform: rotate(var(--tilt));
+  box-shadow: 0 12px 25px #0003, 0 2px 3px #0002;
+  transition: transform 400ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 400ms;
+}
+.project-photo:hover, .project-photo:focus-visible {
+  transform: rotate(0deg) translateY(-8px) scale(1.025);
+  box-shadow: 0 22px 40px #0004;
+}
+.project-photo:focus-visible { outline: 3px solid var(--text); outline-offset: 8px; }
+.project-photo .project-image { border-radius: 0; background: #ceccc5; aspect-ratio: 1.5; }
+.project-photo .project-image img { filter: grayscale(0.4); }
+.education-cover { height: 100%; display: flex; flex-direction: column; justify-content: space-between; padding: 9%; background: #283a33; color: #e8e5dd; }
+.education-cover > span { font: clamp(22px, 3vw, 42px) "IBM Plex Mono", monospace; letter-spacing: -0.07em; }
+.education-cover small { font: 9px/1.6 "IBM Plex Mono", monospace; }
+.project-photo:hover img, .project-photo:focus-visible img { filter: grayscale(0); transform: scale(1.03); }
+.photo-tape {
+  position: absolute; z-index: 1; width: 80px; height: 26px; top: -12px; left: calc(50% - 40px);
+  background: #d2c6a9bc; transform: rotate(-7deg);
+}
+.photo-caption { display: flex; align-items: center; justify-content: space-between; gap: 15px; padding: 17px 5px 2px; }
+.photo-caption small { display: block; font-family: "IBM Plex Mono", monospace; font-size: 9px; color: #626059; margin-bottom: 6px; }
+.photo-caption strong { display: block; font-size: clamp(16px, 1.7vw, 24px); letter-spacing: -0.04em; font-weight: 600; }
+.photo-caption svg { flex: none; font-size: 23px; }
+.photo-number { position: absolute; top: 23px; right: 23px; color: #fff; background: #141414c9; padding: 5px 7px; font: 10px "IBM Plex Mono", monospace; }
+.project-note {
+  --text: #292818;
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  width: min(620px, calc(100% - 40px));
+  max-height: calc(100dvh - 70px);
+  padding: 48px;
+  border: 0;
+  overflow: auto;
+  background: #eee2a6;
+  color: var(--text);
+  box-shadow: 8px 16px 0 #0002, 0 30px 80px #0006;
+}
+.project-note[open] { animation: note-arrive 450ms cubic-bezier(0.16, 1, 0.3, 1) both; }
+.project-note::before { content: ""; position: absolute; top: 0; left: calc(50% - 45px); width: 90px; height: 18px; background: #c8bc8a99; transform: rotate(-3deg); }
+.project-note::backdrop { background: #101010b8; }
+.note-close { position: absolute; right: 14px; top: 14px; width: 40px; height: 40px; display: grid; place-items: center; border: 0; background: transparent; font-size: 24px; }
+.note-close:hover { background: #29281812; }
+.note-kicker { display: block; padding-right: 20px; font: 10px "IBM Plex Mono", monospace; margin-bottom: 20px; }
+.project-note h2 { font-size: clamp(30px, 4vw, 44px); }
+.note-description { font-size: 15px; line-height: 1.8; margin: 24px 0; }
+.note-detail { border-top: 1px solid #29281830; padding-top: 15px; margin-top: 18px; }
+.note-detail h3 { margin: 0 0 6px; font-size: 13px; }
+.note-detail p { margin: 0; font-size: 13px; line-height: 1.8; }
+.note-stack { font: 10px/1.9 "IBM Plex Mono", monospace; margin: 24px 0; }
+.note-links { display: flex; flex-wrap: wrap; gap: 24px; }
+.note-links a { display: inline-flex; gap: 10px; align-items: center; border-bottom: 1px solid; padding-block: 8px; font-size: 13px; }
+@keyframes note-arrive { from { opacity: 0; transform: translateY(-35px) rotate(-4deg) scale(0.94); } to { opacity: 1; transform: none; } }
+.reveal {
+  transform: translate(var(--reveal-x, 0px), var(--reveal-y, 30px)) rotate(var(--reveal-turn, 0deg));
+  transition: opacity 700ms ease-out, transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-top { --reveal-y: -45px; }
+.reveal.visible, .reveal:focus-within { opacity: 1; transform: none; }
+.reveal-group > *, .stack-groups > div {
+  opacity: 0;
+  transform: translate(var(--reveal-x, 0px), var(--reveal-y, 0px));
+  transition: opacity 700ms ease-out, transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.about-heading { --reveal-x: -65px; }
+.about-body { --reveal-x: 65px; transition-delay: 120ms; }
+.stack-section > h2 { --reveal-y: -45px; }
+.stack-groups > div { --reveal-x: 55px; }
+.stack-groups > div:nth-child(2) { transition-delay: 100ms; }
+.stack-groups > div:nth-child(3) { transition-delay: 200ms; }
+.contact-heading { --reveal-y: -50px; }
+.contact-form { --reveal-x: 65px; transition-delay: 150ms; }
+.reveal-group.visible > *, .reveal-group:focus-within > *,
+.reveal-group.visible .stack-groups > div { opacity: 1; transform: none; }
+@media (max-width: 640px) {
+  .project-collage { grid-template-columns: 1fr; gap: 45px; padding: 18px 12px 40px; }
+  .collage-item { grid-column: 1; width: 92%; margin: 0; --reveal-x: -30px; --reveal-y: 20px; }
+  .collage-item:nth-child(even) { justify-self: end; --reveal-x: 30px; }
+  .project-photo { padding: 9px 9px 14px; }
+  .photo-caption strong { font-size: 19px; }
+  .project-note { padding: 45px 25px 30px; max-height: calc(100dvh - 40px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .reveal-group > *, .stack-groups > div { opacity: 1; transform: none; transition: none; }
+  .project-note[open] { animation: none; }
+  .project-photo:hover, .project-photo:focus-visible { transform: rotate(var(--tilt)); }
+}
