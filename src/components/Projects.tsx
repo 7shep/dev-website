@@ -17,7 +17,7 @@ const projects: Project[] = [
   {
     category: "Queen's Web Development Club",
     title: "QWeb.dev",
-    image: "./assets/qweb.png",
+    image: "./assets/qweb.jpg",
     alt: "QWeb.dev website interface",
     url: "https://qweb.dev",
     github: "https://github.com/queens-web-development-club/qweb-main-2026",
