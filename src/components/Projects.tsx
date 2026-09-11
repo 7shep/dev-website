@@ -15,6 +15,20 @@ export type Project = {
 
 const projects: Project[] = [
   {
+    category: "Queen's Web Development Club",
+    title: "QWeb.dev",
+    image: "./assets/qweb.png",
+    alt: "QWeb.dev website interface",
+    url: "https://qweb.dev",
+    github: "https://github.com/queens-web-development-club/qweb-main-2026",
+    description:
+      "Official website for Queen's Web Development Club, a student-run organization that teaches web development and hosts hackathons.",
+    problem:
+      "The club needed a overhaul of their website to make it modern, responsive, and better showcase its events, projects, and resources for students interested in web development.",
+    role: "Made alongside one co-chair, I was responsible for the backend architecture, database design, and implementing the front-end with React and Tailwind CSS.",
+    stack: ["TypeScript", "React 19", "Tailwind CSS", "Vite", "Supabase"],
+  },
+  {
     category: "AI Design Tool",
     title: "Universal: AI Art Director",
     image: "./assets/universal.png",
@@ -101,23 +115,19 @@ const projects: Project[] = [
       "Supabase",
     ],
   },
-  {
-    category: "Queen's Web Development Club",
-    title: "Project: ./education/",
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuDBIOFAIfiA0TyrCZWLw55VFcBY4PKr3535bJYAb4m0EelNx8LZ4FDvCfByg13SadPv-YL3n-XMIr-x2CNNodvAnkNnQvHh2qeTo-jwmBWQmw9g7me5lMskTdr3GyWIzbedS0Fa60we9FBCoaxhoCwAeI9VfQu4rRE9_7M61gpiG7ghS0uO74BykpLH24nEkZhqPldztZVzYXiHDz988ewUMumbDz78waNrSmAXFT8tUxUgxZPmxoBXwjzFguB8PGrvPNmhqm9Zp8fJ",
-    alt: "visualization of complex mathematical geometry with glowing golden lines",
-    url: "https://qweb.dev/education",
-    github: "https://github.com/queens-web-development-club/qweb-main-2024",
-    description:
-      "Education landing page for Queen's Web Development Club — a hub surfacing workshop content and learning paths for club members.",
-    problem:
-      "QWeb ran hands-on web dev tutorials but had no persistent home for the material. Members who missed a session had nowhere to catch up.",
-    role: "Built the education page in React as part of the club's Next.js site.",
-    stack: ["Next.js", "React"],
-  },
 ];
 
 export default function Projects() {
-  return <ProjectCollage projects={[projects[0], projects[3], projects[1], projects[2], projects[4], projects[5]]} />;
+  return (
+    <ProjectCollage
+      projects={[
+        projects[0],
+        projects[3],
+        projects[1],
+        projects[2],
+        projects[4],
+        projects[5],
+      ]}
+    />
+  );
 }
