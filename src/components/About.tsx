@@ -25,7 +25,7 @@ export default function About() {
           </h2>
           <a
             className="text-link"
-            href="/assets/Alex_Shepherd_Resume.pdf"
+            href="/assets/Alex_Shepherd_Resume_2026.pdf"
             download
           >
             Download Resume <TbArrowDownRight aria-hidden />
