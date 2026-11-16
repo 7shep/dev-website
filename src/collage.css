@@ -1,111 +1,173 @@
-.project-collage {
+/* Generative gallery: straight framed exhibits with placards */
+
+.gallery {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   align-items: start;
-  gap: 32px 0;
+  column-gap: 40px;
+  row-gap: 96px;
   padding: 30px 20px 65px;
 }
-.collage-item { position: relative; grid-column: span 5; --tilt: -4deg; --reveal-x: -80px; --reveal-y: 20px; --reveal-turn: -7deg; }
-.collage-item-1 { grid-column: 1 / 7; }
-.collage-item-2 { grid-column: 8 / 13; margin-top: 90px; --tilt: 5deg; --reveal-x: 80px; --reveal-turn: 8deg; }
-.collage-item-3 { grid-column: 2 / 7; margin-top: -30px; --tilt: 3deg; --reveal-x: 0px; --reveal-y: -65px; }
-.collage-item-4 { grid-column: 8 / 13; margin-top: 65px; --tilt: -5deg; --reveal-x: 70px; }
-.collage-item-5 { grid-column: 1 / 6; --tilt: -3deg; --reveal-y: -65px; }
-.collage-item-6 { grid-column: 7 / 12; margin-top: 65px; --tilt: 4deg; --reveal-x: 80px; --reveal-turn: 7deg; }
-.collage-item:hover, .collage-item:focus-within { z-index: 2; }
-.project-photo {
+.exhibit { position: relative; }
+.exhibit-1 { grid-column: 1 / -1; }
+.exhibit-2 { grid-column: 1 / 7; }
+.exhibit-3 { grid-column: 7 / 13; margin-top: 120px; }
+
+.exhibit-button {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.exhibit-button:focus-visible { outline: 2px solid var(--text); outline-offset: 6px; }
+
+.exhibit-frame {
+  display: block;
+  padding: 18px;
+  background: var(--raised);
+  border: 1px solid var(--line);
+  transition: border-color 400ms;
+}
+
+.exhibit-art {
   display: block;
   position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  background: var(--surface);
+  color: var(--muted);
+}
+.exhibit-1 .exhibit-art { aspect-ratio: 21 / 9; }
+
+.exhibit-photo {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  border: 0;
-  padding: 12px 12px 18px;
-  background: #e8e5dd;
-  color: #292923;
-  text-align: left;
-  transform: rotate(var(--tilt));
-  box-shadow: 0 12px 25px #0003, 0 2px 3px #0002;
-  transition: transform 400ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 400ms;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.05);
+  opacity: 0;
+  transform: scale(1.02);
+  transition: opacity 600ms cubic-bezier(0.16, 1, 0.3, 1), transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
 }
-.project-photo:hover, .project-photo:focus-visible {
-  transform: rotate(0deg) translateY(-8px) scale(1.025);
-  box-shadow: 0 22px 40px #0004;
+
+.exhibit-button:hover .exhibit-photo,
+.exhibit-button:focus-visible .exhibit-photo { opacity: 1; transform: scale(1); }
+.exhibit-button:hover .exhibit-frame,
+.exhibit-button:focus-visible .exhibit-frame { border-color: var(--muted); }
+.exhibit-button:hover .placard-arrow,
+.exhibit-button:focus-visible .placard-arrow { transform: translate(4px, -4px); }
+
+.exhibit-placard {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  column-gap: 20px;
+  row-gap: 4px;
+  align-items: baseline;
+  padding-top: 18px;
 }
-.project-photo:focus-visible { outline: 3px solid var(--text); outline-offset: 8px; }
-.project-photo .project-image { border-radius: 0; background: #ceccc5; aspect-ratio: 1.5; }
-.project-photo .project-image img { filter: grayscale(0.4); }
-.education-cover { height: 100%; display: flex; flex-direction: column; justify-content: space-between; padding: 9%; background: #283a33; color: #e8e5dd; }
-.education-cover > span { font: clamp(22px, 3vw, 42px) "IBM Plex Mono", monospace; letter-spacing: -0.07em; }
-.education-cover small { font: 9px/1.6 "IBM Plex Mono", monospace; }
-.project-photo:hover img, .project-photo:focus-visible img { filter: grayscale(0); transform: scale(1.03); }
-.photo-tape {
-  position: absolute; z-index: 1; width: 80px; height: 26px; top: -12px; left: calc(50% - 40px);
-  background: #d2c6a9bc; transform: rotate(-7deg);
+.placard-number {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--quiet);
 }
-.photo-caption { display: flex; align-items: center; justify-content: space-between; gap: 15px; padding: 17px 5px 2px; }
-.photo-caption small { display: block; font-family: "IBM Plex Mono", monospace; font-size: 9px; color: #626059; margin-bottom: 6px; }
-.photo-caption strong { display: block; font-size: clamp(16px, 1.7vw, 24px); letter-spacing: -0.04em; font-weight: 600; }
-.photo-caption svg { flex: none; font-size: 23px; }
-.photo-number { position: absolute; top: 23px; right: 23px; color: #fff; background: #141414c9; padding: 5px 7px; font: 10px "IBM Plex Mono", monospace; }
+.placard-title {
+  grid-column: 2;
+  grid-row: 1;
+  font-size: clamp(20px, 2vw, 28px);
+  font-weight: 500;
+  letter-spacing: -0.035em;
+}
+.placard-meta {
+  grid-column: 2;
+  grid-row: 2;
+  font-size: 14px;
+  color: var(--muted);
+}
+.placard-medium {
+  grid-column: 2;
+  grid-row: 3;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--quiet);
+}
+.placard-arrow {
+  grid-column: 3;
+  grid-row: 1;
+  font-size: 22px;
+  transition: transform 400ms;
+}
+
+/* Reveal: overrides the generic .reveal in index.css for exhibits only */
+.exhibit.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 800ms cubic-bezier(0.16, 1, 0.3, 1), transform 800ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.exhibit.reveal.visible { opacity: 1; transform: translateY(0); }
+.exhibit-3.reveal { transition-delay: 120ms; }
+
+/* Note dialog */
 .project-note {
-  --text: #292818;
   position: fixed;
   inset: 0;
   margin: auto;
   width: min(620px, calc(100% - 40px));
   max-height: calc(100dvh - 70px);
   padding: 48px;
-  border: 0;
+  border: 1px solid var(--line);
   overflow: auto;
-  background: #eee2a6;
+  background: var(--surface);
   color: var(--text);
-  box-shadow: 8px 16px 0 #0002, 0 30px 80px #0006;
 }
 .project-note[open] { animation: note-arrive 450ms cubic-bezier(0.16, 1, 0.3, 1) both; }
-.project-note::before { content: ""; position: absolute; top: 0; left: calc(50% - 45px); width: 90px; height: 18px; background: #c8bc8a99; transform: rotate(-3deg); }
-.project-note::backdrop { background: #101010b8; }
-.note-close { position: absolute; right: 14px; top: 14px; width: 40px; height: 40px; display: grid; place-items: center; border: 0; background: transparent; font-size: 24px; }
-.note-close:hover { background: #29281812; }
-.note-kicker { display: block; padding-right: 20px; font: 10px "IBM Plex Mono", monospace; margin-bottom: 20px; }
+.project-note::backdrop { background: rgb(0 0 0 / 0.72); }
+.note-close { position: absolute; right: 14px; top: 14px; width: 40px; height: 40px; display: grid; place-items: center; border: 0; background: transparent; color: var(--text); font-size: 24px; }
+.note-close:hover { background: var(--raised); }
+.note-cover {
+  position: relative;
+  aspect-ratio: 21 / 9;
+  margin-bottom: 28px;
+  overflow: hidden;
+  background: var(--raised);
+  color: var(--muted);
+  border: 1px solid var(--line);
+}
+.note-kicker { display: block; padding-right: 20px; font: 10px "IBM Plex Mono", monospace; color: var(--muted); margin-bottom: 20px; }
 .project-note h2 { font-size: clamp(30px, 4vw, 44px); }
 .note-description { font-size: 15px; line-height: 1.8; margin: 24px 0; }
-.note-detail { border-top: 1px solid #29281830; padding-top: 15px; margin-top: 18px; }
+.note-detail { border-top: 1px solid var(--line); padding-top: 15px; margin-top: 18px; }
 .note-detail h3 { margin: 0 0 6px; font-size: 13px; }
 .note-detail p { margin: 0; font-size: 13px; line-height: 1.8; }
-.note-stack { font: 10px/1.9 "IBM Plex Mono", monospace; margin: 24px 0; }
+.note-stack { font: 10px/1.9 "IBM Plex Mono", monospace; color: var(--muted); margin: 24px 0; }
 .note-links { display: flex; flex-wrap: wrap; gap: 24px; }
 .note-links a { display: inline-flex; gap: 10px; align-items: center; border-bottom: 1px solid; padding-block: 8px; font-size: 13px; }
-@keyframes note-arrive { from { opacity: 0; transform: translateY(-35px) rotate(-4deg) scale(0.94); } to { opacity: 1; transform: none; } }
-.reveal {
-  transform: translate(var(--reveal-x, 0px), var(--reveal-y, 30px)) rotate(var(--reveal-turn, 0deg));
-  transition: opacity 700ms ease-out, transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-.reveal-top { --reveal-y: -45px; }
-.reveal.visible, .reveal:focus-within { opacity: 1; transform: none; }
-.reveal-group > *, .stack-groups > div {
-  opacity: 0;
-  transform: translate(var(--reveal-x, 0px), var(--reveal-y, 0px));
-  transition: opacity 700ms ease-out, transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-.about-heading { --reveal-x: -65px; }
-.about-body { --reveal-x: 65px; transition-delay: 120ms; }
-.stack-section > h2 { --reveal-y: -45px; }
-.stack-groups > div { --reveal-x: 55px; }
-.stack-groups > div:nth-child(2) { transition-delay: 100ms; }
-.stack-groups > div:nth-child(3) { transition-delay: 200ms; }
-.contact-heading { --reveal-y: -50px; }
-.contact-form { --reveal-x: 65px; transition-delay: 150ms; }
-.reveal-group.visible > *, .reveal-group:focus-within > *,
-.reveal-group.visible .stack-groups > div { opacity: 1; transform: none; }
-@media (max-width: 640px) {
-  .project-collage { grid-template-columns: 1fr; gap: 45px; padding: 18px 12px 40px; }
-  .collage-item { grid-column: 1; width: 92%; margin: 0; --reveal-x: -30px; --reveal-y: 20px; }
-  .collage-item:nth-child(even) { justify-self: end; --reveal-x: 30px; }
-  .project-photo { padding: 9px 9px 14px; }
-  .photo-caption strong { font-size: 19px; }
+@keyframes note-arrive { from { opacity: 0; transform: translateY(-16px) scale(0.98); } to { opacity: 1; transform: none; } }
+
+@media (max-width: 760px) {
+  .gallery { grid-template-columns: 1fr; row-gap: 64px; padding: 18px 12px 40px; }
+  .exhibit-1, .exhibit-2, .exhibit-3 { grid-column: 1 / -1; margin-top: 0; }
+  .exhibit-1 .exhibit-art, .exhibit-art { aspect-ratio: 4 / 3; }
+  .exhibit-frame { padding: 10px; }
   .project-note { padding: 45px 25px 30px; max-height: calc(100dvh - 40px); }
 }
+
 @media (prefers-reduced-motion: reduce) {
-  .reveal, .reveal-group > *, .stack-groups > div { opacity: 1; transform: none; transition: none; }
+  .exhibit.reveal, .exhibit.reveal.visible { opacity: 1; transform: none; transition: none; }
+  .exhibit-3.reveal { transition-delay: 0ms; }
+  .exhibit-frame, .exhibit-photo, .placard-arrow { transition: none; }
+  .exhibit-photo, .exhibit-button:hover .exhibit-photo, .exhibit-button:focus-visible .exhibit-photo { transform: none; }
+  .exhibit-button:hover .placard-arrow, .exhibit-button:focus-visible .placard-arrow { transform: none; }
   .project-note[open] { animation: none; }
-  .project-photo:hover, .project-photo:focus-visible { transform: rotate(var(--tilt)); }
 }
