@@ -683,11 +683,6 @@ h2 {
   justify-self: start;
   margin-top: 10px;
 }
-.about-footnote {
-  font-size: 13px;
-  color: var(--quiet);
-  margin: 40px 0 0;
-}
 @media (max-width: 760px) {
   .about-exhibit-grid { grid-template-columns: 1fr; row-gap: 56px; }
   .about-exhibit-grid > .about-exhibit:nth-child(2) { margin-top: 0; }
@@ -777,6 +772,10 @@ h2 {
 @media (max-width: 1024px) {
   .wrap {
     width: calc(100% - 64px);
+  }
+  .about-grid,
+  .stack-section {
+    gap: 40px;
   }
   .hero-aside {
     display: none;
@@ -966,6 +965,11 @@ h2 {
   }
 }
 @media (max-width: 640px) {
+  .about-grid,
+  .stack-section {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
   .section-heading {
     display: block;
   }

@@ -62,7 +62,6 @@ export default function About() {
               status={sports.status}
             />
           </div>
-          <p className="about-footnote">Also: the gym. One more rep.</p>
         </div>
       </div>
     </section>
