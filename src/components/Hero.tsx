@@ -1,6 +1,7 @@
-import { lazy, Suspense, useState } from "react";
+import { useState } from "react";
 import { TbArrowDownRight, TbPlayerPause, TbPlayerPlay } from "react-icons/tb";
-const PersonalObjects = lazy(() => import("./PersonalObjects"));
+import HeroArtwork from "./HeroArtwork";
+
 export default function Hero() {
   const [paused, setPaused] = useState(false);
   return (
@@ -13,16 +14,24 @@ export default function Hero() {
             Shepherd<span className="name-period">.</span>
           </span>
         </h1>
-        <div className="hero-objects">
-          <Suspense fallback={<div className="object-fallback" aria-hidden />}>
-            <PersonalObjects paused={paused} />
-          </Suspense>
-        </div>
-        {/* <span className="hero-aside">
-          A little of what
-          <br />
-          makes me, me.
-        </span> */}
+        <figure className="hero-exhibit">
+          <div className="hero-frame">
+            <div className="hero-canvas">
+              <HeroArtwork
+                seed="Alex Shepherd"
+                paused={paused}
+                label="Live generative artwork: ink lines flowing through a field seeded by Alex's name"
+              />
+            </div>
+          </div>
+          <figcaption className="hero-placard">
+            <span className="placard-number">No. 00</span>
+            <span className="hero-placard-title">Field study, live</span>
+            <span className="hero-placard-meta">
+              Generated in your browser from my name. Never the same twice.
+            </span>
+          </figcaption>
+        </figure>
       </div>
       <div className="hero-bottom">
         <div className="hero-copy">
@@ -38,7 +47,7 @@ export default function Hero() {
         <button
           className="pause-control"
           onClick={() => setPaused(!paused)}
-          aria-label={paused ? "Resume 3D motion" : "Pause 3D motion"}
+          aria-label={paused ? "Resume artwork" : "Pause artwork"}
           aria-pressed={paused}
         >
           {paused ? (
