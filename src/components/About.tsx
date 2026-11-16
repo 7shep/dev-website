@@ -1,15 +1,12 @@
 import { TbArrowDownRight } from "react-icons/tb";
 import { useReveal } from "../hooks/useReveal";
-
-const interests = [
-  ["01", "Baseball", "Go Jays."],
-  ["02", "The gym", "One more rep."],
-  ["03", "Music", "Always in rotation."],
-  ["04", "Football", "Go Steelers."],
-];
+import { useSports } from "../lib/liveData";
+import SongOfTheWeek from "./SongOfTheWeek";
+import TeamExhibit from "./TeamExhibit";
 
 export default function About() {
   const { ref, isVisible } = useReveal();
+  const sports = useSports();
   return (
     <section id="about" className="about-section wrap section-space">
       <div
@@ -39,24 +36,33 @@ export default function About() {
           </p>
           <p>
             Originally from Elora, Ontario. Usually building a side project,
-            getting a workout in, or finding a reason to talk baseball. My best
-            projects start with something I’m already curious about.
+            getting a workout in, or finding a reason to talk baseball and
+            football. My best projects start with something I’m already curious
+            about.
           </p>
-          <div
-            className="personal-interests"
-            aria-label="A few of Alex's interests"
-          >
-            <p className="interests-label">Outside the browser</p>
-            <div className="interest-list">
-              {interests.map(([number, title, note]) => (
-                <div className="interest-row" key={title}>
-                  <span className="interest-number">{number}</span>
-                  <span className="interest-title">{title}</span>
-                  <small>{note}</small>
-                </div>
-              ))}
-            </div>
+        </div>
+        <div className="about-exhibits" role="group" aria-label="Outside the browser">
+          <p className="interests-label">Outside the browser</p>
+          <div className="about-exhibit-grid">
+            <SongOfTheWeek />
+            <TeamExhibit
+              number={2}
+              team="Blue Jays"
+              kind="baseball"
+              motto="Go Jays."
+              summary={sports.data?.jays ?? null}
+              status={sports.status}
+            />
+            <TeamExhibit
+              number={3}
+              team="Steelers"
+              kind="football"
+              motto="Here we go."
+              summary={sports.data?.steelers ?? null}
+              status={sports.status}
+            />
           </div>
+          <p className="about-footnote">Also: the gym. One more rep.</p>
         </div>
       </div>
     </section>

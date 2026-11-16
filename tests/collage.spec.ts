@@ -33,7 +33,7 @@ test("collage is responsive and scroll reveals finish", async ({ page }) => {
       await photo.scrollIntoViewIfNeeded();
       await expect(photo).toHaveClass(/visible/);
     }
-    for (const section of [".about-grid", ".stack-section", ".contact-section"]) {
+    for (const section of [".about-grid", ".stack-section"]) {
       await page.locator(section).scrollIntoViewIfNeeded();
       await expect(page.locator(section)).toHaveClass(/visible/);
     }

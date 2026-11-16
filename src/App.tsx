@@ -1,11 +1,10 @@
 import { useState } from "react";
-import { TbArrowUpRight, TbMoon, TbSun } from "react-icons/tb";
+import { TbMoon, TbSun } from "react-icons/tb";
 import Hero from "./components/Hero";
 import About from "./components/About";
 import TechnicalStack from "./components/TechnicalStack";
 import Projects from "./components/Projects";
 import Clubs from "./components/Clubs";
-import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import Entrance from "./components/Entrance";
 
@@ -29,9 +28,6 @@ export default function App() {
           <a href="#projects">Work</a>
           <a href="#clubs">Clubs</a>
           <a href="#about">About</a>
-          <a href="#contact">
-            Contact <TbArrowUpRight aria-hidden />
-          </a>
         </nav>
         <button
           className="theme-toggle"
@@ -45,9 +41,8 @@ export default function App() {
         <Hero />
         <Projects />
         <Clubs />
-        <About />
         <TechnicalStack />
-        <Contact />
+        <About />
       </main>
       <Footer />
     </div>
