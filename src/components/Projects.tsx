@@ -24,8 +24,8 @@ const projects: Project[] = [
     description:
       "Official website for Queen's Web Development Club, a student-run organization that teaches web development and hosts hackathons.",
     problem:
-      "The club needed a overhaul of their website to make it modern, responsive, and better showcase its events, projects, and resources for students interested in web development.",
-    role: "Made alongside one co-chair, I was responsible for the backend architecture, database design, and implementing the front-end with React and Tailwind CSS.",
+      "The club needed a full overhaul of its website to make it modern, responsive, and better at showcasing its events, projects, and resources for students interested in web development.",
+    role: "Revamped the entire site alongside one other club member. I owned the backend architecture and database design, and built the front end with React and Tailwind CSS.",
     stack: ["TypeScript", "React 19", "Tailwind CSS", "Vite", "Supabase"],
   },
   {
@@ -41,32 +41,6 @@ const projects: Project[] = [
       "Coding agents can produce functional interfaces while repeatedly falling back to generic layouts, arbitrary gradients, and weak visual hierarchy. Universal adds design direction and critique to the workflow so creative intent survives implementation.",
     role: "Main developer, this project is open-source and actively maintained.",
     stack: ["TypeScript", "React 19", "Node.js", "MCP SDK", "Vite", "pnpm"],
-  },
-  {
-    category: "CLI Agent/VS Code Extension",
-    title: "Screenshot-To-Code (S2C)",
-    image: "./assets/image.png",
-    alt: "constellation AI agent framework architecture diagram",
-    github: "https://github.com/7shep/screenshot-to-code",
-    description:
-      "A VS Code Extension or a CLI tool that turns a screenshot of a GUI into a production-ready React component, using a Gemini/Groq API agent to analyze the image and generate code.",
-    problem:
-      "If I found a GUI I liked online, there was not a reliable way to turn a screenshot of it into code that I could build on.",
-    role: "Sole developer.",
-    stack: ["Gemini + Groq API", "TypeScript", "React", "JavaScript"],
-  },
-  {
-    category: "AI Developer Tools",
-    title: "git-assistant",
-    image: "./assets/npm.png",
-    alt: "git assistant application interface",
-    github: "https://github.com/7shep/git-assistant",
-    description:
-      "AI agent that answers natural language questions about git repositories with zero cloud dependencies. Works as both a standalone CLI (ran locally) and MCP server integration for AI coding assistants.",
-    problem:
-      "Developers juggle complex git workflows and context switching between terminals and AI tools. git-assistant bridges this gap by making git fully queryable through natural language, running entirely on your machine.",
-    role: "Sole developer. ",
-    stack: ["TypeScript", "Node.js", "Ollama", "MCP SDK", "Ink", "git"],
   },
   {
     category: "MLB Machine Learning",
@@ -91,43 +65,8 @@ const projects: Project[] = [
       "Render",
     ],
   },
-  {
-    category: "Discord Analytics Bot",
-    title: "Project: Andromeda",
-    image: "./assets/andromeda-galaxy-infrared-1024x880.jpg",
-    alt: "andromeda galaxy",
-    url: "https://discord-analytics-eight.vercel.app",
-    github: "https://github.com/7shep/discord-analytics",
-    description:
-      "Full-stack analytics platform that tracks Discord server activity in real time and visualizes it through an interactive dashboard.",
-    problem:
-      "Discord admins have no native way to monitor engagement trends. Andromeda replaces manual scrolling with live metrics on member activity, message volume, and user contributions.",
-    role: "Sole developer.",
-    stack: [
-      "TypeScript",
-      "React",
-      "Vite",
-      "Recharts",
-      "discord.js",
-      "Express",
-      "Prisma",
-      "PostgreSQL",
-      "Supabase",
-    ],
-  },
 ];
 
 export default function Projects() {
-  return (
-    <ProjectCollage
-      projects={[
-        projects[0],
-        projects[3],
-        projects[1],
-        projects[2],
-        projects[4],
-        projects[5],
-      ]}
-    />
-  );
+  return <ProjectCollage projects={projects} />;
 }

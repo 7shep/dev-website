@@ -1025,3 +1025,80 @@ h2 {
     transform: none;
   }
 }
+
+/* Clubs */
+.clubs-section {
+  padding-top: 52px;
+  border-top: 1px solid var(--line);
+}
+.club-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 56px;
+  border-bottom: 1px solid var(--line);
+}
+.club-card {
+  padding: 28px 0 34px;
+  border-top: 1px solid var(--line);
+}
+.club-number {
+  display: block;
+  color: var(--muted);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  margin-bottom: 18px;
+}
+.club-card h3 {
+  font-size: clamp(22px, 2.2vw, 30px);
+  letter-spacing: -0.035em;
+  font-weight: 500;
+  line-height: 1.15;
+  margin: 0 0 12px;
+}
+.club-role {
+  color: var(--text);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin: 0 0 22px;
+}
+.club-summary {
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.7;
+  margin: 0 0 24px;
+}
+.club-highlights {
+  list-style: none;
+  margin: 0 0 22px;
+  padding: 0;
+  border-top: 1px solid var(--line);
+}
+.club-highlights li {
+  position: relative;
+  padding: 12px 0 12px 22px;
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+.club-highlights li::before {
+  content: "-";
+  position: absolute;
+  left: 0;
+  top: 11px;
+  color: var(--muted);
+  font-family: "IBM Plex Mono", monospace;
+}
+.club-tags {
+  color: var(--muted);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  margin: 0 0 24px;
+}
+@media (max-width: 760px) {
+  .club-grid {
+    grid-template-columns: 1fr;
+  }
+}
