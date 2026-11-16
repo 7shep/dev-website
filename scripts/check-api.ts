@@ -598,6 +598,28 @@ const tests: Array<[string, (logs: Logs) => Promise<void>]> = [
     },
   ],
   [
+    "20. song: token 400 JSON error logs only the OAuth code, never description or secrets",
+    async (logs) => {
+      mockFetch([
+        {
+          match: (u) => u.startsWith(TOKEN_PREFIX),
+          respond: () =>
+            new Response(JSON.stringify({ error: "invalid_grant", error_description: "Invalid refresh token REFRESH-abc-456" }), {
+              status: 400,
+              headers: { "Content-Type": "application/json" },
+            }),
+        },
+      ]);
+      const res = await run(songHandler, { method: "GET" });
+      expect(res.statusCode === 502, `status ${res.statusCode}`);
+      const logText = logs.join(" | ");
+      expect(logText.includes("invalid_grant"), `log missing code: ${logText}`);
+      for (const secret of [SECRET, REFRESH, "Invalid refresh token"]) {
+        expect(!logText.includes(secret) && !JSON.stringify(res.body).includes(secret), `leaked ${secret}`);
+      }
+    },
+  ],
+  [
     "19. sports: one team missing -> short cache only",
     async () => {
       mockFetch(sportsRoutes(true, false));

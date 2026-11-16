@@ -13,6 +13,7 @@ const DAY_MS = 24 * 60 * 60 * 1000;
 const WEEK_MS = 7 * DAY_MS;
 const UPSTREAM_TIMEOUT_MS = 8000;
 const TOKEN_URL = "https://accounts.spotify.com/api/token";
+const OAUTH_ERRORS = ["invalid_grant", "invalid_client", "invalid_request", "unauthorized_client", "unsupported_grant_type"];
 const RECENT_URL = "https://api.spotify.com/v1/me/player/recently-played?limit=50";
 const TOP_URL = "https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=1";
 const CACHE_OK = "public, s-maxage=3600, stale-while-revalidate=86400";
@@ -160,7 +161,11 @@ async function getAccessToken(
       signal: AbortSignal.timeout(UPSTREAM_TIMEOUT_MS),
     });
     if (!res.ok) {
-      console.error("spotify token refresh failed", res.status);
+      // Log only a standard OAuth error code from a fixed list (never the
+      // description, which can echo input), so failures can be diagnosed.
+      const body: unknown = await res.json().catch(() => null);
+      const code = isObj(body) && typeof body.error === "string" ? body.error : "";
+      console.error("spotify token refresh failed", res.status, OAUTH_ERRORS.includes(code) ? code : "");
       return null;
     }
     // A refresh_token in the response is deliberately ignored (no persistence).
@@ -213,9 +218,10 @@ export default async function handler(req: any, res: any) {
       return reply(req, res, 405, { error: "method not allowed" }, CACHE_NONE);
     }
 
-    const clientId = process.env.SPOTIFY_CLIENT_ID;
-    const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
-    const refreshToken = process.env.SPOTIFY_REFRESH_TOKEN;
+    // Trim: a pasted value with a trailing newline or space would be rejected.
+    const clientId = process.env.SPOTIFY_CLIENT_ID?.trim();
+    const clientSecret = process.env.SPOTIFY_CLIENT_SECRET?.trim();
+    const refreshToken = process.env.SPOTIFY_REFRESH_TOKEN?.trim();
     if (!clientId || !clientSecret || !refreshToken) {
       console.error("spotify env missing");
       return reply(req, res, 503, { error: "unavailable" }, CACHE_NONE);
