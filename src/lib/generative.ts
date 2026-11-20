@@ -236,3 +236,40 @@ export function contourLines(
   }
   return strokes;
 }
+
+// Seeded code listing: rows of token-like dashes with drifting indentation and
+// blank lines, plus a few wavy "lint" underlines. Points stay inside the canvas.
+export function codeLines(seed: string, width: number, height: number): Stroke[] {
+  if (!(width > 0 && height > 0)) return [];
+  const rand = mulberry32(hashSeed(seed + ":code"));
+  const gap = Math.max(7, Math.min(width, height) / 26);
+  const left = gap * 1.5;
+  const right = width - gap * 1.5;
+  const strokes: Stroke[] = [];
+  let indent = 0;
+  for (let y = gap; y < height - gap / 2; y += gap) {
+    const step = rand();
+    if (step < 0.25) indent = Math.min(indent + 1, 4);
+    else if (step < 0.45) indent = Math.max(indent - 1, 0);
+    if (rand() < 0.12) continue; // blank line
+    let x = left + indent * gap * 1.6;
+    const tokens = 1 + Math.floor(rand() * 5);
+    for (let t = 0; t < tokens; t++) {
+      const len = gap * (1 + rand() * 5);
+      if (x + len > right) break;
+      strokes.push({ points: [[x, y], [x + len, y]], width: 1.1, alpha: 0.25 + rand() * 0.35 });
+      if (rand() < 0.07) {
+        // A lint squiggle under this token.
+        const points: [number, number][] = [];
+        const waves = Math.max(2, Math.round(len / (gap * 0.5)));
+        for (let i = 0; i <= waves * 4; i++) {
+          const px = x + (len * i) / (waves * 4);
+          points.push([px, y + gap * 0.3 + Math.sin((i / 4) * Math.PI * 2) * gap * 0.12]);
+        }
+        strokes.push({ points, width: 0.9, alpha: 0.9 });
+      }
+      x += len + gap * 0.6;
+    }
+  }
+  return strokes;
+}

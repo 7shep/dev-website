@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { contourLines, flowField, gridLines } from "../lib/generative";
+import { codeLines, contourLines, flowField, gridLines } from "../lib/generative";
 
 export default function GenerativeCover({
   seed,
@@ -10,7 +10,7 @@ export default function GenerativeCover({
   seed: string;
   label: string;
   className?: string;
-  variant?: "flow" | "grid" | "contour";
+  variant?: "flow" | "grid" | "contour" | "code";
 }) {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -43,7 +43,9 @@ export default function GenerativeCover({
           ? gridLines(seed, cssWidth, cssHeight)
           : variant === "contour"
             ? contourLines(seed, cssWidth, cssHeight)
-            : flowField(seed, cssWidth, cssHeight);
+            : variant === "code"
+              ? codeLines(seed, cssWidth, cssHeight)
+              : flowField(seed, cssWidth, cssHeight);
       for (const stroke of strokes) {
         ctx.lineWidth = stroke.width;
         ctx.globalAlpha = stroke.alpha;
