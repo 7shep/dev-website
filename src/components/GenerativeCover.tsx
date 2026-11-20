@@ -1,14 +1,16 @@
 import { useEffect, useRef } from "react";
-import { flowField } from "../lib/generative";
+import { contourLines, flowField, gridLines } from "../lib/generative";
 
 export default function GenerativeCover({
   seed,
   label,
   className,
+  variant = "flow",
 }: {
   seed: string;
   label: string;
   className?: string;
+  variant?: "flow" | "grid" | "contour";
 }) {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -36,7 +38,13 @@ export default function GenerativeCover({
       ctx.lineCap = "round";
       ctx.lineJoin = "round";
 
-      for (const stroke of flowField(seed, cssWidth, cssHeight)) {
+      const strokes =
+        variant === "grid"
+          ? gridLines(seed, cssWidth, cssHeight)
+          : variant === "contour"
+            ? contourLines(seed, cssWidth, cssHeight)
+            : flowField(seed, cssWidth, cssHeight);
+      for (const stroke of strokes) {
         ctx.lineWidth = stroke.width;
         ctx.globalAlpha = stroke.alpha;
         ctx.beginPath();
@@ -68,7 +76,7 @@ export default function GenerativeCover({
       resizeObserver.disconnect();
       themeObserver?.disconnect();
     };
-  }, [seed]);
+  }, [seed, variant]);
 
   return (
     <div

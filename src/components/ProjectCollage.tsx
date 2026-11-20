@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { TbArrowUpRight, TbX } from "react-icons/tb";
+import { TbArrowUpRight, TbPlus, TbX } from "react-icons/tb";
 import { useReveal } from "../hooks/useReveal";
 import type { Project } from "./Projects";
 import GenerativeCover from "./GenerativeCover";
@@ -11,8 +11,8 @@ function Exhibit({ project, index, onOpen }: { project: Project; index: number; 
       <button className="exhibit-button" onClick={() => onOpen(project)} aria-label={`Read about ${project.title}`} aria-haspopup="dialog">
         <span className="exhibit-frame">
           <span className="exhibit-art">
-            <GenerativeCover seed={project.title} label={`Generative artwork for ${project.title}`} />
-            <img className="exhibit-photo" src={project.image} alt="" loading="lazy" width="900" height="600" />
+            <GenerativeCover seed={project.title} variant={project.cover} label={`Generative frame for ${project.title}`} />
+            <img className="exhibit-photo" data-fit={project.imageFit} src={project.image} alt="" loading="lazy" width="900" height="600" />
           </span>
         </span>
         <span className="exhibit-placard">
@@ -20,9 +20,15 @@ function Exhibit({ project, index, onOpen }: { project: Project; index: number; 
           <strong className="placard-title">{project.title.replace("Project: ", "")}</strong>
           <span className="placard-meta">{project.category}</span>
           <span className="placard-medium">{project.stack.slice(0, 3).join(" / ")}</span>
-          <TbArrowUpRight aria-hidden className="placard-arrow" />
+          <span className="placard-more" aria-hidden>Read more <TbPlus className="placard-arrow" /></span>
         </span>
       </button>
+      {(project.url || project.github) && (
+        <div className="exhibit-links">
+          {project.url && <a href={project.url} target="_blank" rel="noreferrer" aria-label={`Visit ${project.title} (opens in a new tab)`}>Visit project <span aria-hidden="true">↗</span></a>}
+          {project.github && <a href={project.github} target="_blank" rel="noreferrer" aria-label={`View ${project.title} source (opens in a new tab)`}>View source <span aria-hidden="true">↗</span></a>}
+        </div>
+      )}
     </article>
   );
 }
@@ -49,7 +55,10 @@ function Note({ project, onClose }: { project: Project; onClose: () => void }) {
         if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) dialog.current?.close();
       }}>
       <button className="note-close" aria-label="Close project" onClick={() => dialog.current?.close()} autoFocus><TbX aria-hidden /></button>
-      <div className="note-cover"><GenerativeCover seed={project.title} label={`Generative artwork for ${project.title}`} /></div>
+      <div className="note-cover">
+        <GenerativeCover seed={project.title} variant={project.cover} label={`Generative frame for ${project.title}`} />
+        <img className="note-photo" data-fit={project.imageFit} src={project.image} alt={project.alt} width="900" height="600" />
+      </div>
       <span className="note-kicker">{project.category}</span>
       <h2 id="project-note-title">{project.title.replace("Project: ", "")}</h2>
       <p className="note-description">{project.description}</p>
@@ -70,7 +79,7 @@ export default function ProjectCollage({ projects }: { projects: Project[] }) {
   return (
     <section id="projects" className="projects-section wrap">
       <div ref={ref} className={`section-heading reveal reveal-top${isVisible ? " visible" : ""}`}>
-        <h2>Selected work</h2><span>Three works. Each cover is generated from its name.</span>
+        <h2>Selected work</h2><span>Three projects, each framed by a drawing generated from its name.</span>
       </div>
       <div className="gallery">{projects.map((project, index) => <Exhibit key={project.title} project={project} index={index} onOpen={setSelected} />)}</div>
       {selected && <Note project={selected} onClose={() => setSelected(null)} />}

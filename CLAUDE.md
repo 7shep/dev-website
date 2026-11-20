@@ -4,34 +4,39 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Personal developer portfolio website for Alex Shepherd. Single-page static site with a space/cosmic theme.
+Personal developer portfolio website for Alex Shepherd. A single page with a monochrome gallery look, framed by a seeded generative-drawing engine. **DESIGN.md is the design source of truth.** Read it before any UI change.
 
 ## Tech Stack
 
 - React 19 + TypeScript + Vite
-- Tailwind CSS v3 with a fully custom dark color system (Material You-style tokens)
-- Material Symbols Outlined + Space Grotesk + Inter via Google Fonts CDN
+- Custom CSS with semantic tokens (`src/index.css`, `src/collage.css`). Tailwind 3 is installed, but the site's styling lives in those two files.
+- Manrope Variable + IBM Plex Mono, self-hosted via @fontsource
+- react-icons (Tabler set)
+- Vercel-style serverless functions in `api/` (song of the week, sports results)
 
 ## Commands
 
 ```bash
-npm run dev      # Start dev server (Vite)
-npm run build    # TypeScript check + production build
-npm run preview  # Preview production build locally
+npm run dev           # Start dev server (Vite)
+npm run build         # TypeScript check + production build
+npm run preview       # Preview production build locally
+npm run test:browser  # Playwright browser tests
 ```
 
 ## Architecture
 
-- `src/App.tsx` — root, renders all sections in order
-- `src/components/` — one file per section:
-  - `Hero.tsx` — full-screen landing with orbit rings, central sun, three planet nav nodes
-  - `TechnicalStack.tsx` — three-column skills grid (Frontend / Backend / Tools)
-  - `Projects.tsx` — project card grid
-  - `Footer.tsx` — bottom bar
-  - `ProgressIndicator.tsx` — fixed right-side scroll dots
-- `src/index.css` — Tailwind directives + custom CSS classes (`star-field`, `orbit-path`, `material-symbols-outlined`)
-- `tailwind.config.js` — full custom color palette (surface-*, primary, secondary, tertiary tokens) and font families
+- `src/App.tsx`: root. Header nav with active-section state, saved theme, and the sections in order.
+- `src/components/`:
+  - `Entrance.tsx`: once-per-session intro overlay
+  - `Hero.tsx` + `HeroArtwork.tsx`: name and live flow-field artwork with pause control
+  - `Projects.tsx`: project data. `ProjectCollage.tsx` renders the exhibits and the project `<dialog>`.
+  - `GenerativeCover.tsx`: canvas drawing with `flow` / `grid` / `contour` variants
+  - `Clubs.tsx`, `TechnicalStack.tsx`, `About.tsx` (+ `SongOfTheWeek.tsx`, `TeamExhibit.tsx`, `SportArt.tsx`), `Contact.tsx`, `Footer.tsx`
+- `src/lib/generative.ts`: seeded generators. `src/lib/liveData.ts`: live song and sports data.
+- `src/hooks/useReveal.ts`: scroll reveal (`reveal` / `reveal-group` + `visible`)
 
-## Design tokens
+## Design rules
 
-Colors follow a Material You dark scheme. Key tokens: `primary` (#cc97ff purple), `secondary` (#00fbfb cyan), `tertiary` (#ff51fa pink), `background`/`surface-*` (near-black). All defined in `tailwind.config.js`.
+- Colours come from the tokens on `.portfolio` (`--surface`, `--raised`, `--text`, `--muted`, `--quiet`, `--line`). The one intentional exception is the fixed dark plate behind logos (see DESIGN.md).
+- Nothing below 12px. Text contrast is at least 4.5:1 in both themes. Touch targets are at least 44px.
+- Don't redesign the hero. The generative art frames the work and never replaces it.

@@ -2,7 +2,6 @@ import { TbArrowUpRight } from "react-icons/tb";
 import { useReveal } from "../hooks/useReveal";
 
 type Club = {
-  number: string;
   name: string;
   role: string;
   url?: string;
@@ -13,7 +12,6 @@ type Club = {
 
 const clubs: Club[] = [
   {
-    number: "01",
     name: "Queen's Web Development Club (QWeb)",
     role: "Development Executive",
     url: "https://qweb.dev",
@@ -27,7 +25,6 @@ const clubs: Club[] = [
     tags: ["React", "TypeScript", "Supabase", "Mentorship"],
   },
   {
-    number: "02",
     name: "QMIND",
     role: "Development Director",
     summary:
@@ -45,9 +42,6 @@ const clubs: Club[] = [
 function ClubCard({ club }: { club: Club }) {
   return (
     <article className="club-card">
-      <span className="club-number" aria-hidden="true">
-        {club.number}
-      </span>
       <h3>{club.name}</h3>
       <p className="club-role">{club.role}</p>
       <p className="club-summary">{club.summary}</p>

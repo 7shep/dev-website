@@ -11,14 +11,19 @@ export type Project = {
   problem: string;
   role: string;
   stack: string[];
+  cover: "flow" | "grid" | "contour";
+  /** "contain" shows a logo whole instead of cropping it to fill the frame. */
+  imageFit?: "cover" | "contain";
 };
 
 const projects: Project[] = [
   {
     category: "Queen's Web Development Club",
+    cover: "grid",
     title: "QWeb.dev",
-    image: "./assets/qweb.jpg",
-    alt: "QWeb.dev website interface",
+    image: "./assets/qweb-logo.webp",
+    imageFit: "contain",
+    alt: "QWeb logo: a blue-to-green Q beside <web>",
     url: "https://qweb.dev",
     github: "https://github.com/queens-web-development-club/qweb-main-2026",
     description:
@@ -30,6 +35,7 @@ const projects: Project[] = [
   },
   {
     category: "AI Design Tool",
+    cover: "flow",
     title: "Universal: AI Art Director",
     image: "./assets/universal.png",
     alt: "Universal AI art director interface",
@@ -44,6 +50,7 @@ const projects: Project[] = [
   },
   {
     category: "MLB Machine Learning",
+    cover: "contour",
     title: "Prospect Predictor",
     image: "./assets/baseball.jpg",
     alt: "baseball prospect analytics dashboard",
