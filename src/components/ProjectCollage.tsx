@@ -4,11 +4,11 @@ import { useReveal } from "../hooks/useReveal";
 import type { Project } from "./Projects";
 import GenerativeCover from "./GenerativeCover";
 
-function Exhibit({ project, index, onOpen }: { project: Project; index: number; onOpen: (project: Project) => void }) {
+function Exhibit({ project, index, onOpen }: { project: Project; index: number; onOpen: (project: Project, opener: HTMLElement) => void }) {
   const { ref, isVisible } = useReveal();
   return (
     <article ref={ref} className={`exhibit exhibit-${index + 1} reveal${isVisible ? " visible" : ""}`}>
-      <button className="exhibit-button" onClick={() => onOpen(project)} aria-label={`Read about ${project.title}`} aria-haspopup="dialog">
+      <button className="exhibit-button" onClick={(event) => onOpen(project, event.currentTarget)} aria-label={`Read about ${project.title}`} aria-haspopup="dialog">
         <span className="exhibit-frame">
           <span className="exhibit-art">
             <GenerativeCover seed={project.title} variant={project.cover} label={`Generative frame for ${project.title}`} />
@@ -76,13 +76,26 @@ function Note({ project, onClose }: { project: Project; onClose: () => void }) {
 export default function ProjectCollage({ projects }: { projects: Project[] }) {
   const { ref, isVisible } = useReveal();
   const [selected, setSelected] = useState<Project | null>(null);
+  // The card that opened the dialog. Safari doesn't focus buttons on mouse click, so the
+  // native <dialog> focus restore would land on <body>; refocus the card explicitly instead.
+  const opener = useRef<HTMLElement | null>(null);
+  const open = (project: Project, element: HTMLElement) => {
+    opener.current = element;
+    setSelected(project);
+  };
+  const close = () => {
+    setSelected(null);
+    const element = opener.current;
+    opener.current = null;
+    if (element?.isConnected) requestAnimationFrame(() => element.focus());
+  };
   return (
     <section id="projects" className="projects-section wrap">
       <div ref={ref} className={`section-heading reveal reveal-top${isVisible ? " visible" : ""}`}>
         <h2>Selected work</h2><span>Three projects, each framed by a drawing generated from its name.</span>
       </div>
-      <div className="gallery">{projects.map((project, index) => <Exhibit key={project.title} project={project} index={index} onOpen={setSelected} />)}</div>
-      {selected && <Note project={selected} onClose={() => setSelected(null)} />}
+      <div className="gallery">{projects.map((project, index) => <Exhibit key={project.title} project={project} index={index} onOpen={open} />)}</div>
+      {selected && <Note project={selected} onClose={close} />}
     </section>
   );
 }

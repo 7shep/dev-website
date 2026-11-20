@@ -33,7 +33,7 @@ export default function Hero() {
             <button
               className="pause-control"
               onClick={() => setPaused(!paused)}
-              aria-label={paused ? "Resume artwork" : "Pause artwork"}
+              aria-label="Pause artwork"
               aria-pressed={paused}
             >
               {paused ? (

@@ -66,3 +66,19 @@ test("exhibits, about and stack reveal on scroll, with no overflow and visit lin
     await page.screenshot({ path: `test-results/collage-${width}.png` });
   }
 });
+
+test("dialog returns focus to its card even when the card was never focused (Safari mouse click)", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/");
+  const card = page.locator(".exhibit-button").first();
+  await card.scrollIntoViewIfNeeded();
+  // el.click() opens the dialog without focusing the button, like a mouse click in Safari.
+  await card.evaluate((el: HTMLElement) => {
+    (document.activeElement as HTMLElement | null)?.blur();
+    el.click();
+  });
+  await expect(page.getByRole("dialog")).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(page.getByRole("dialog")).toHaveCount(0);
+  await expect(card).toBeFocused();
+});

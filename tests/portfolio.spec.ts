@@ -17,7 +17,8 @@ test("desktop: hero artwork, pause, light theme persists, resume and contact", a
   await expect(pause).toHaveAttribute("aria-label", "Pause artwork");
   await pause.click();
   await expect(pause).toHaveAttribute("aria-pressed", "true");
-  await expect(pause).toHaveAttribute("aria-label", "Resume artwork");
+  // One signal only: the label stays fixed and aria-pressed carries the state.
+  await expect(pause).toHaveAttribute("aria-label", "Pause artwork");
   await page.screenshot({ path: "test-results/desktop-dark.png" });
 
   await page.getByRole("button", { name: "Switch to light theme" }).click();
@@ -97,4 +98,24 @@ test("nav marks Contact at the bottom of the page on tall and wide viewports", a
     await expect(page.getByRole("link", { name: "Contact", exact: true })).toHaveAttribute("aria-current", "location");
     await expect(page.getByRole("link", { name: "About", exact: true })).not.toHaveAttribute("aria-current", /.*/);
   }
+});
+
+test("saved light theme is applied before the app script runs (no dark flash)", async ({ page }) => {
+  await page.emulateMedia({ colorScheme: "dark" });
+  await page.addInitScript(() => {
+    localStorage.setItem("theme", "light");
+    document.addEventListener("readystatechange", () => {
+      if (document.readyState !== "interactive") return;
+      // Module scripts have not run yet at this point: this is what the first paint sees.
+      (window as unknown as { __early: unknown }).__early = {
+        theme: document.documentElement.dataset.theme,
+        meta: document.querySelector('meta[name="theme-color"]')?.getAttribute("content"),
+        colorScheme: document.documentElement.style.colorScheme,
+        appMounted: !!document.querySelector(".portfolio"),
+      };
+    });
+  });
+  await page.goto("/");
+  const early = await page.evaluate(() => (window as unknown as { __early: unknown }).__early);
+  expect(early).toEqual({ theme: "light", meta: "#efeee9", colorScheme: "light", appMounted: false });
 });
