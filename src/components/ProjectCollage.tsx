@@ -92,7 +92,7 @@ export default function ProjectCollage({ projects }: { projects: Project[] }) {
   return (
     <section id="projects" className="projects-section wrap">
       <div ref={ref} className={`section-heading reveal reveal-top${isVisible ? " visible" : ""}`}>
-        <h2>Selected work</h2><span>Three projects, each framed by a drawing generated from its name.</span>
+        <h2>Selected work</h2><span>Four projects, each framed by a drawing generated from its name.</span>
       </div>
       <div className="gallery">{projects.map((project, index) => <Exhibit key={project.title} project={project} index={index} onOpen={open} />)}</div>
       {selected && <Note project={selected} onClose={close} />}

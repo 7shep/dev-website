@@ -30,7 +30,7 @@ npm run test:browser  # Playwright browser tests
   - `Entrance.tsx`: once-per-session intro overlay
   - `Hero.tsx` + `HeroArtwork.tsx`: name and live flow-field artwork with pause control
   - `Projects.tsx`: project data. `ProjectCollage.tsx` renders the exhibits and the project `<dialog>`.
-  - `GenerativeCover.tsx`: canvas drawing with `flow` / `grid` / `contour` variants
+  - `GenerativeCover.tsx`: canvas drawing with `flow` / `grid` / `contour` / `code` variants
   - `Clubs.tsx`, `TechnicalStack.tsx`, `About.tsx` (+ `SongOfTheWeek.tsx`, `TeamExhibit.tsx`, `SportArt.tsx`), `Contact.tsx`, `Footer.tsx`
 - `src/lib/generative.ts`: seeded generators. `src/lib/liveData.ts`: live song and sports data.
 - `src/hooks/useReveal.ts`: scroll reveal (`reveal` / `reveal-group` + `visible`)

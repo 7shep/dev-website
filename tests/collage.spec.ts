@@ -4,7 +4,7 @@ test("each exhibit opens its note, focuses Close, and closes on Escape or backdr
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/");
   const exhibits = page.locator(".exhibit-button");
-  await expect(exhibits).toHaveCount(3);
+  await expect(exhibits).toHaveCount(4);
   for (let index = 0; index < 3; index++) {
     const exhibit = exhibits.nth(index);
     const title = ((await exhibit.locator(".placard-title").textContent()) ?? "").trim();
@@ -38,7 +38,7 @@ test("exhibits, about and stack reveal on scroll, with no overflow and visit lin
     await page.keyboard.press("Escape");
 
     const exhibits = page.locator(".exhibit");
-    await expect(exhibits).toHaveCount(3);
+    await expect(exhibits).toHaveCount(4);
     for (const exhibit of await exhibits.all()) {
       await exhibit.scrollIntoViewIfNeeded();
       await expect(exhibit).toHaveClass(/visible/);
@@ -57,7 +57,7 @@ test("exhibits, about and stack reveal on scroll, with no overflow and visit lin
     }
 
     const visitLinks = page.locator(".exhibit-links a", { hasText: "Visit project" });
-    await expect(visitLinks).toHaveCount(3);
+    await expect(visitLinks).toHaveCount(4);
     for (const link of await page.locator(".exhibit-links a").all()) {
       await expect(link).toHaveAttribute("target", "_blank");
     }

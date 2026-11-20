@@ -12,6 +12,7 @@
 .exhibit-1 { grid-column: 1 / -1; }
 .exhibit-2 { grid-column: 1 / 7; }
 .exhibit-3 { grid-column: 7 / 13; margin-top: 120px; }
+.exhibit-4 { grid-column: 1 / -1; }
 
 .exhibit-button {
   display: block;
@@ -43,7 +44,7 @@
   background: var(--surface);
   color: var(--muted);
 }
-.exhibit-1 .exhibit-art { aspect-ratio: 21 / 9; }
+.exhibit-1 .exhibit-art, .exhibit-4 .exhibit-art { aspect-ratio: 21 / 9; }
 
 /* Logos: show them whole on a fixed dark plate (white type needs it in both themes). */
 .exhibit-photo[data-fit="contain"], .note-photo[data-fit="contain"] {
@@ -181,8 +182,8 @@
 
 @media (max-width: 760px) {
   .gallery { grid-template-columns: 1fr; row-gap: 64px; padding: 18px 12px 40px; }
-  .exhibit-1, .exhibit-2, .exhibit-3 { grid-column: 1 / -1; margin-top: 0; }
-  .exhibit-1 .exhibit-art, .exhibit-art { aspect-ratio: 4 / 3; }
+  .exhibit-1, .exhibit-2, .exhibit-3, .exhibit-4 { grid-column: 1 / -1; margin-top: 0; }
+  .exhibit-1 .exhibit-art, .exhibit-4 .exhibit-art, .exhibit-art { aspect-ratio: 4 / 3; }
   .exhibit-frame { padding: 10px; }
   .project-note { padding: 45px 25px 30px; max-height: calc(100dvh - 40px); }
 }

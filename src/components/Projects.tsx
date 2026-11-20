@@ -11,7 +11,7 @@ export type Project = {
   problem: string;
   role: string;
   stack: string[];
-  cover: "flow" | "grid" | "contour";
+  cover: "flow" | "grid" | "contour" | "code";
   /** "contain" shows a logo whole instead of cropping it to fill the frame. */
   imageFit?: "cover" | "contain";
 };
@@ -32,6 +32,22 @@ const projects: Project[] = [
       "The club needed a full overhaul of its website to make it modern, responsive, and better at showcasing its events, projects, and resources for students interested in web development.",
     role: "Revamped the entire site alongside one other club member. I owned the backend architecture and database design, and built the front end with React and Tailwind CSS.",
     stack: ["TypeScript", "React 19", "Tailwind CSS", "Vite", "Supabase"],
+  },
+  {
+    category: "Agent Tooling · Open Source",
+    cover: "code",
+    title: "MCP-Linter",
+    image: "./assets/mcp-lint-success.png",
+    imageFit: "contain",
+    alt: "Bar chart: fixing what mcp-lint flags took agent task success from 53% to 98% across 15 held-out tasks",
+    url: "https://pypi.org/project/mcp-linter/",
+    github: "https://github.com/7shep/mcp-linter",
+    description:
+      "Open-source Python CLI that lints MCP servers against Anthropic's tool-design principles: vague descriptions, oversized responses, opaque IDs, unhelpful errors and overlapping tools. Each server gets a token-weighted score, and a fixing proxy repairs problems without forking the server.",
+    problem:
+      "Tools built like developer APIs can flood an agent's context or fail without saying how to fix the call. Across 18 official and third-party servers, it found Microsoft's markitdown-mcp returning ~87,000 tokens for a single file, over three times Claude Code's cap. Behind the fixing proxy, agent success on 15 held-out tasks rose from 53% to 98%.",
+    role: "Sole developer. Built the static and probe rules, scoring, fixing proxy and eval harness, then extended it toward MCP security: hidden-text detection, a tool lockfile against rug pulls, and install-pinning checks.",
+    stack: ["Python", "MCP SDK", "Anthropic API", "GitHub Actions", "PyPI"],
   },
   {
     category: "AI Design Tool",

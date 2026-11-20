@@ -38,7 +38,7 @@ export default function SongOfTheWeek() {
         </div>
       </div>
       <div className="exhibit-placard">
-        <span className="placard-number">No. 04</span>
+        <span className="placard-number">No. 05</span>
         <strong className="placard-title">Song of the week</strong>
         <span className="placard-meta">{meta}</span>
         {song && <span className="placard-medium">{mediumLine(song)}</span>}

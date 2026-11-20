@@ -3,7 +3,7 @@
 ## Direction
 A monochrome gallery for one person's work. Graphite surfaces, silver type, and one seeded generative-drawing engine that frames everything: the hero, each project, and the About exhibits. The art frames the work; it never replaces it.
 
-The page reads as one catalogue: hero No. 00, projects No. 01–03, About exhibits No. 04–06. Clubs carry no numbers.
+The page reads as one catalogue: hero No. 00, projects No. 01–04, About exhibits No. 05–07. Clubs carry no numbers.
 
 Design variance: 8/10. Motion: 4/10. Density: 3/10.
 Custom CSS (src/index.css, src/collage.css) on React 19 / Vite / Tailwind 3.
@@ -27,7 +27,7 @@ Manrope Variable for display and body; IBM Plex Mono for metadata. Both self-hos
 ## Composition
 - **Hero (fixed, do not redesign):** the name in two planes over a live flow-field drawing seeded by "Alex Shepherd". `Shepherd` uses difference blending in dark mode. The pause control (44×44 circle) sits in the hero placard.
 - **Entrance:** at most once per session (sessionStorage `intro-seen`), ≤1.5s, counts 2006 → the current year, and ends on "Alex Shepherd, building since 2006". Any key, click or scroll dismisses it. It is skipped under reduced motion.
-- **Selected work:** three exhibits in offset columns. Each real screenshot is inset (about 8%) inside a generative mat, and each project has its own variant: QWeb `grid`, Universal `flow`, Prospect Predictor `contour` (the `cover` field in Projects.tsx).
+- **Selected work:** four exhibits: wide, an offset pair, wide. Each real screenshot is inset (about 8%) inside a generative mat, and each project has its own variant: QWeb `grid`, MCP-Linter `code` (a code listing with lint squiggles), Universal `flow`, Prospect Predictor `contour` (the `cover` field in Projects.tsx). Square or logo images use `imageFit: "contain"`.
   - Screenshots are grayscale until hover or focus, and full colour on touch devices.
   - The card button opens a `<dialog>` with the screenshot, idea, role and stack. Visit/Source links sit on the card, outside the button.
   - ↗ is used only for links that leave the site.
@@ -38,7 +38,7 @@ Manrope Variable for display and body; IBM Plex Mono for metadata. Both self-hos
 - **Header:** wordmark, four nav links, and two round 44px controls (`.icon-control`): GitHub (Tabler `TbBrandGithubFilled`), hidden at ≤420px, and the theme toggle.
 
 ## Generative engine
-src/lib/generative.ts: `flowField` (hero, Universal, song fallback), `gridLines`, `contourLines`, all deterministic from a string seed. GenerativeCover takes `variant`. SportArt draws the seam and gridiron studies. Canvases take their ink from CSS `color`, so they follow the theme.
+src/lib/generative.ts: `flowField` (hero, Universal, song fallback), `gridLines`, `contourLines`, `codeLines`, all deterministic from a string seed. GenerativeCover takes `variant`. SportArt draws the seam and gridiron studies. Canvases take their ink from CSS `color`, so they follow the theme.
 
 ## Interaction and accessibility
 - Native links, buttons and `<dialog>`, which closes with Esc, a backdrop click or the X button. Visible focus and a skip link.
