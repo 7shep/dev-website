@@ -1,36 +1,56 @@
 # Alex Shepherd portfolio
 
 ## Direction
-A monochrome, contemporary personal portfolio. The previous space theme is replaced by graphite surfaces, silver typography, and a restrained collection of objects drawn from Alex's interests.
+A monochrome gallery for one person's work. Graphite surfaces, silver type, and one seeded generative-drawing engine that frames everything: the hero, each project, and the About exhibits. The art frames the work; it never replaces it.
 
-Design variance: 8/10. Motion: 5/10. Density: 3/10.
-Custom CSS on the existing React 19 / Vite / Tailwind 3 foundation.
+The page reads as one catalogue: hero No. 00, projects No. 01–03, About exhibits No. 04–06. Clubs carry no numbers.
+
+Design variance: 8/10. Motion: 4/10. Density: 3/10.
+Custom CSS (src/index.css, src/collage.css) on React 19 / Vite / Tailwind 3.
 
 ## Palette and type
-Semantic CSS variables in src/index.css are the source of truth.
-Dark: surface #141414, raised #1d1d1d, primary #e8e8e6, secondary #a0a09c.
-Light: surface #e8e8e4, raised #dcdcd7, primary #222222, secondary #60605b.
-Respect system preference at startup; offer a manual theme control.
-Manrope Variable for display and body; IBM Plex Mono for occasional metadata. Fonts are self-hosted.
+Semantic CSS variables on `.portfolio` in src/index.css are the source of truth. `data-theme` on `.portfolio` and on `<html>` switches them.
+
+| Token | Dark | Light | Use |
+| --- | --- | --- | --- |
+| `--surface` | #0e0e0e | #efeee9 | page |
+| `--raised` | #161616 | #e5e4de | frames, panels |
+| `--text` | #ecebe6 | #1a1a1a | primary text |
+| `--muted` | #9b9a95 | #5c5b56 | secondary text |
+| `--quiet` | #8a8984 | #62615c | metadata, placard numbers (≥4.5:1 on surface) |
+| `--line` | #2a2a2a | #cfcec8 | rules, borders |
+
+Theme: starts from the system preference, and the header toggle overrides it. The choice is saved in localStorage `theme`. The `<html>` background and `meta[name=theme-color]` follow it.
+
+Manrope Variable for display and body; IBM Plex Mono for metadata. Both self-hosted. **Nothing renders below 12px.**
 
 ## Composition
-The hero name has two planes: Alex behind the object and Shepherd in front. Foreground type uses difference blending to remain distinct where it overlaps the object.
-Only one 3D object is visible at a time: baseball, dumbbell, vinyl record, or football. Buttons choose the object; pointer movement gently changes its angle.
-The hero has a pause control, reduced-motion support, a CSS fallback, and a separately loaded Three.js bundle. Scene geometry and textures are generated locally and disposed on unmount. Rendering skips hidden and offscreen content, and paused scenes render only when needed.
+- **Hero (fixed, do not redesign):** the name in two planes over a live flow-field drawing seeded by "Alex Shepherd". `Shepherd` uses difference blending in dark mode. The pause control (44×44 circle) sits in the hero placard.
+- **Entrance:** at most once per session (sessionStorage `intro-seen`), ≤1.5s, counts 2006 → the current year, and ends on "Alex Shepherd, building since 2006". Any key, click or scroll dismisses it. It is skipped under reduced motion.
+- **Selected work:** three exhibits in offset columns. Each real screenshot is inset (about 8%) inside a generative mat, and each project has its own variant: QWeb `grid`, Universal `flow`, Prospect Predictor `contour` (the `cover` field in Projects.tsx).
+  - Screenshots are grayscale until hover or focus, and full colour on touch devices.
+  - The card button opens a `<dialog>` with the screenshot, idea, role and stack. Visit/Source links sit on the card, outside the button.
+  - ↗ is used only for links that leave the site.
+- **Clubs:** two cards with role, summary, highlights and tags.
+- **Skills:** three grouped lists.
+- **About:** the statement, bio, resume download, and "Outside the browser": live song of the week (Spotify, `api/song-of-the-week.ts`) and Blue Jays / Steelers results (`api/sports.ts`). Each has a generative fallback when data is missing.
+- **Contact:** an email link (alshe0644@gmail.com), resume download, LinkedIn and GitHub. The footer repeats GitHub and LinkedIn.
+- **Header:** wordmark, four nav links, and two round 44px controls (`.icon-control`): GitHub (Tabler `TbBrandGithubFilled`), hidden at ≤420px, and the theme toggle.
 
-Selected work uses offset columns, real existing cover assets, source/live links, and expandable problem/role information. All six projects are retained; two are in the expandable archive. Images are monochrome until interaction.
-About, grouped tools, and a plain-language contact form complete the page.
-Keep all existing section IDs and the resume download.
+## Generative engine
+src/lib/generative.ts: `flowField` (hero, Universal, song fallback), `gridLines`, `contourLines`, all deterministic from a string seed. GenerativeCover takes `variant`. SportArt draws the seam and gridiron studies. Canvases take their ink from CSS `color`, so they follow the theme.
 
 ## Interaction and accessibility
-Native links, buttons, labels and details elements. Visible focus, a skip link, and polite form feedback.
-Contact uses the existing /api/contact endpoint and preserves name/email/message fields. Required fields and email validation, a request timeout, retry, and direct email fallback.
-No scroll hijacking, custom cursor, particle field, or external model dependency.
-Mobile columns collapse; test at 320px, 390px, 768px, and desktop.
-Sharp 2px corners on rectangular controls and imagery; circular theme control only.
+- Native links, buttons and `<dialog>`, which closes with Esc, a backdrop click or the X button. Visible focus and a skip link.
+- Header nav marks the section in view with `aria-current="location"`, shown as an underline.
+- Touch targets are at least 44px: nav, theme toggle, pause, card links, footer and contact links.
+- Reduced motion disables the entrance, reveals and transforms. The hero art pauses offscreen, when the tab is hidden, and on request.
+- No scroll hijacking, custom cursor or external model dependency.
+- Sharp corners of 2px or less on rectangles; circles only for the header icon controls and the pause control.
+- Logos use `imageFit: "contain"` on a fixed `#0e0e0e` plate in both themes, because white logo type needs a dark ground.
+- Check at 320px, 390px, 768px and desktop, in both themes.
 
 ## Verification
-npm run build
-npm run test:browser (uses locally installed Chrome)
-Browser tests cover responsive overflow, scene availability, selector states, theme switching, keyboard navigation, resume delivery, project images, archive expansion, and mocked contact success/failure. These tests never send real email.
-Repository-wide lint currently also scans an existing nested .claude worktree and encounters pre-existing contact API any types and a typewriter hook warning. Changed application components have been checked separately.
+- `npm run build`
+- `npm run test:browser` (Playwright, local Chrome)
+- Impeccable: `impeccable detect --json http://localhost:5173 --viewport 390x844` (and 1440x900)

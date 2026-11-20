@@ -24,6 +24,24 @@
   <meta name="twitter:image" content="https://alexshepherd.dev/og.png" />
 
   <meta name="theme-color" content="#0e0e0e" />
+  <!-- Apply the saved or system theme before first paint, so light-theme visitors never see a dark flash.
+       Mirrors the logic in src/App.tsx (localStorage "theme", else prefers-color-scheme). -->
+  <script>
+    (function () {
+      var theme = null;
+      try {
+        var saved = localStorage.getItem("theme");
+        if (saved === "dark" || saved === "light") theme = saved;
+      } catch (e) {}
+      if (!theme) theme = matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+      var root = document.documentElement;
+      root.dataset.theme = theme;
+      root.style.colorScheme = theme;
+      if (theme === "light") {
+        document.querySelector('meta[name="theme-color"]').setAttribute("content", "#efeee9");
+      }
+    })();
+  </script>
 </head>
 
 <body>

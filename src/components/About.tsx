@@ -46,7 +46,7 @@ export default function About() {
           <div className="about-exhibit-grid">
             <SongOfTheWeek />
             <TeamExhibit
-              number={2}
+              number={5}
               team="Blue Jays"
               kind="baseball"
               motto="Go Jays."
@@ -54,7 +54,7 @@ export default function About() {
               status={sports.status}
             />
             <TeamExhibit
-              number={3}
+              number={6}
               team="Steelers"
               kind="football"
               motto="Here we go."

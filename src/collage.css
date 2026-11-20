@@ -45,24 +45,34 @@
 }
 .exhibit-1 .exhibit-art { aspect-ratio: 21 / 9; }
 
-.exhibit-photo {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: grayscale(1) contrast(1.05);
-  opacity: 0;
-  transform: scale(1.02);
-  transition: opacity 600ms cubic-bezier(0.16, 1, 0.3, 1), transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
+/* Logos: show them whole on a fixed dark plate (white type needs it in both themes). */
+.exhibit-photo[data-fit="contain"], .note-photo[data-fit="contain"] {
+  object-fit: contain;
+  padding: 6%;
+  background: #0e0e0e;
 }
+.exhibit-photo, .note-photo {
+  position: absolute;
+  inset: 8%;
+  width: 84%;
+  height: 84%;
+  object-fit: cover;
+  border: 1px solid var(--line);
+  box-shadow: 0 0 0 4px var(--surface);
+}
+.exhibit-photo {
+  filter: grayscale(1) contrast(1.05);
+  transition: filter 600ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.note-photo { inset: 9%; width: 82%; height: 82%; }
 
 .exhibit-button:hover .exhibit-photo,
-.exhibit-button:focus-visible .exhibit-photo { opacity: 1; transform: scale(1); }
+.exhibit-button:focus-visible .exhibit-photo { filter: none; }
+@media (hover: none) { .exhibit-photo { filter: none; } }
 .exhibit-button:hover .exhibit-frame,
 .exhibit-button:focus-visible .exhibit-frame { border-color: var(--muted); }
 .exhibit-button:hover .placard-arrow,
-.exhibit-button:focus-visible .placard-arrow { transform: translate(4px, -4px); }
+.exhibit-button:focus-visible .placard-arrow { transform: rotate(90deg); }
 
 .exhibit-placard {
   display: grid;
@@ -76,7 +86,7 @@
   grid-column: 1;
   grid-row: 1 / span 2;
   font-family: "IBM Plex Mono", monospace;
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0.06em;
   color: var(--quiet);
 }
@@ -97,17 +107,31 @@
   grid-column: 2;
   grid-row: 3;
   font-family: "IBM Plex Mono", monospace;
-  font-size: 11px;
+  font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: var(--quiet);
 }
-.placard-arrow {
+.placard-more {
   grid-column: 3;
   grid-row: 1;
-  font-size: 22px;
-  transition: transform 400ms;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--muted);
 }
+.placard-arrow { font-size: 16px; transition: transform 400ms; }
+.exhibit-links { display: flex; flex-wrap: wrap; gap: 0 24px; padding-top: 4px; }
+.exhibit-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 14px;
+  color: var(--text);
+  border-bottom: 1px solid transparent;
+}
+.exhibit-links a:hover, .exhibit-links a:focus-visible { text-decoration: underline; }
 
 /* Reveal: overrides the generic .reveal in index.css for exhibits only */
 .exhibit.reveal {
@@ -133,7 +157,7 @@
 }
 .project-note[open] { animation: note-arrive 450ms cubic-bezier(0.16, 1, 0.3, 1) both; }
 .project-note::backdrop { background: rgb(0 0 0 / 0.72); }
-.note-close { position: absolute; right: 14px; top: 14px; width: 40px; height: 40px; display: grid; place-items: center; border: 0; background: transparent; color: var(--text); font-size: 24px; }
+.note-close { position: absolute; right: 12px; top: 12px; width: 44px; height: 44px; display: grid; place-items: center; border: 0; background: transparent; color: var(--text); font-size: 24px; }
 .note-close:hover { background: var(--raised); }
 .note-cover {
   position: relative;
@@ -144,15 +168,15 @@
   color: var(--muted);
   border: 1px solid var(--line);
 }
-.note-kicker { display: block; padding-right: 20px; font: 10px "IBM Plex Mono", monospace; color: var(--muted); margin-bottom: 20px; }
+.note-kicker { display: block; padding-right: 20px; font: 12px "IBM Plex Mono", monospace; color: var(--muted); margin-bottom: 20px; }
 .project-note h2 { font-size: clamp(30px, 4vw, 44px); }
 .note-description { font-size: 15px; line-height: 1.8; margin: 24px 0; }
 .note-detail { border-top: 1px solid var(--line); padding-top: 15px; margin-top: 18px; }
 .note-detail h3 { margin: 0 0 6px; font-size: 13px; }
 .note-detail p { margin: 0; font-size: 13px; line-height: 1.8; }
-.note-stack { font: 10px/1.9 "IBM Plex Mono", monospace; color: var(--muted); margin: 24px 0; }
+.note-stack { font: 12px/1.9 "IBM Plex Mono", monospace; color: var(--muted); margin: 24px 0; }
 .note-links { display: flex; flex-wrap: wrap; gap: 24px; }
-.note-links a { display: inline-flex; gap: 10px; align-items: center; border-bottom: 1px solid; padding-block: 8px; font-size: 13px; }
+.note-links a { display: inline-flex; min-height: 44px; gap: 10px; align-items: center; border-bottom: 1px solid; padding-block: 8px; font-size: 13px; }
 @keyframes note-arrive { from { opacity: 0; transform: translateY(-16px) scale(0.98); } to { opacity: 1; transform: none; } }
 
 @media (max-width: 760px) {
@@ -167,7 +191,6 @@
   .exhibit.reveal, .exhibit.reveal.visible { opacity: 1; transform: none; transition: none; }
   .exhibit-3.reveal { transition-delay: 0ms; }
   .exhibit-frame, .exhibit-photo, .placard-arrow { transition: none; }
-  .exhibit-photo, .exhibit-button:hover .exhibit-photo, .exhibit-button:focus-visible .exhibit-photo { transform: none; }
   .exhibit-button:hover .placard-arrow, .exhibit-button:focus-visible .placard-arrow { transform: none; }
   .project-note[open] { animation: none; }
 }

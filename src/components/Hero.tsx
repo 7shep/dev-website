@@ -30,6 +30,18 @@ export default function Hero() {
             <span className="hero-placard-meta">
               Generated in your browser from my name. Never the same twice.
             </span>
+            <button
+              className="pause-control"
+              onClick={() => setPaused(!paused)}
+              aria-label="Pause artwork"
+              aria-pressed={paused}
+            >
+              {paused ? (
+                <TbPlayerPlay aria-hidden />
+              ) : (
+                <TbPlayerPause aria-hidden />
+              )}
+            </button>
           </figcaption>
         </figure>
       </div>
@@ -44,18 +56,6 @@ export default function Hero() {
             Explore my work <TbArrowDownRight aria-hidden />
           </a>
         </div>
-        <button
-          className="pause-control"
-          onClick={() => setPaused(!paused)}
-          aria-label={paused ? "Resume artwork" : "Pause artwork"}
-          aria-pressed={paused}
-        >
-          {paused ? (
-            <TbPlayerPlay aria-hidden />
-          ) : (
-            <TbPlayerPause aria-hidden />
-          )}
-        </button>
       </div>
     </section>
   );
